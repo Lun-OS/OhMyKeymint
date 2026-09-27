@@ -177,4 +177,24 @@
     <string name="soter_beta_reboot">Zygisk Next를 별도로 설치하고 활성화하세요. 기능을 켜거나 끈 후 기기를 다시 시작하세요. 호환성은 검증되지 않았습니다.</string>
     <string name="soter_beta_saved">Soter 베타 설정이 저장되었습니다. 적용하려면 기기를 다시 시작하세요. 호환성은 검증되지 않았습니다.</string>
     <string name="soter_beta_preview">미리보기 전용입니다. 여기서는 기기 설정을 저장할 수 없습니다.</string>
+    <string name="tools_keybox_auto_fetch">Keybox 자동 가져오기</string>
+    <string name="tools_keybox_auto_fetch_desc">설정한 URL에서 Keybox를 다운로드하고, 설치된 것과 다르면 자동으로 교체합니다.</string>
+    <string name="keybox_auto_fetch_warning">사용 시 부팅 후와 설정한 간격마다 아래 URL에서 HTTPS로 base64 인코딩된 keybox.xml을 다운로드하여, 설치된 Keybox와 다르면 자동으로 교체합니다. 신뢰할 수 있는 소스만 사용하세요.</string>
+    <string name="keybox_auto_fetch_enabled">자동 가져오기 사용</string>
+    <string name="keybox_auto_fetch_enabled_desc">기본값은 비활성입니다. 변경 사항은 적용을 눌러야 저장됩니다.</string>
+    <string name="keybox_auto_fetch_url">Keybox URL</string>
+    <string name="keybox_auto_fetch_url_desc">비워 두면 기본 소스를 사용합니다.</string>
+    <string name="keybox_auto_fetch_proxy">다운로드 프록시</string>
+    <string name="keybox_auto_fetch_proxy_desc">선택적 HTTPS 프록시 템플릿입니다. %s 자리에 Keybox URL이 대입됩니다(예: https://gh-proxy.org/$url). 비워 두면 직접 다운로드합니다.</string>
+    <string name="keybox_auto_fetch_now">지금 가져오기</string>
+    <string name="keybox_auto_fetch_saved">자동 가져오기 설정이 저장되었습니다.</string>
+    <string name="keybox_auto_fetch_installed">원격 Keybox를 다운로드하여 설치했습니다.</string>
+    <string name="keybox_auto_fetch_unchanged">원격 Keybox가 설치된 것과 일치합니다.</string>
+    <string name="keybox_auto_fetch_invalid_url">Keybox URL과 프록시는 비워 두거나 https://로 시작해야 합니다</string>
+    <string name="keybox_auto_fetch_preview">미리보기일 뿐입니다. 여기서는 기기 설정을 저장할 수 없습니다.</string>
+    <string name="keybox_auto_fetch_interval">업데이트 간격</string>
+    <string name="keybox_auto_fetch_interval_hours">시간</string>
+    <string name="keybox_auto_fetch_interval_minutes">분</string>
+    <string name="keybox_auto_fetch_interval_desc">이 간격으로 가져오기를 반복합니다(15분~7일). 변경 사항은 다음 새로고침 주기부터 적용됩니다.</string>
+    <string name="keybox_auto_fetch_invalid_interval">업데이트 간격은 15분에서 7일 사이여야 합니다.</string>
 </resources>

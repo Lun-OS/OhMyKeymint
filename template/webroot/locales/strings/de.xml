@@ -177,4 +177,24 @@
     <string name="soter_beta_reboot">Zygisk Next separat installieren und aktivieren. Nach dem Aktivieren oder Deaktivieren das Gerät neu starten. Die Kompatibilität wurde nicht bestätigt.</string>
     <string name="soter_beta_saved">Soter-Beta-Einstellung gespeichert. Das Gerät zum Anwenden neu starten. Die Kompatibilität wurde nicht bestätigt.</string>
     <string name="soter_beta_preview">Nur Vorschau. Geräteeinstellungen können hier nicht gespeichert werden.</string>
+    <string name="tools_keybox_auto_fetch">Keybox automatisch abrufen</string>
+    <string name="tools_keybox_auto_fetch_desc">Ruft einen Keybox von einer konfigurierbaren URL ab und ersetzt den installierten, wenn er abweicht.</string>
+    <string name="keybox_auto_fetch_warning">Wenn aktiviert, wird nach dem Start und im konfigurierten Abstand eine base64-kodierte keybox.xml über HTTPS von der unten angegebenen URL geladen und ersetzt die installierte Keybox, wenn sie abweicht. Nutze nur eine Quelle, der du vertraust.</string>
+    <string name="keybox_auto_fetch_enabled">Automatischen Abruf aktivieren</string>
+    <string name="keybox_auto_fetch_enabled_desc">Standardmäßig deaktiviert. Änderungen werden erst nach dem Tippen auf „Anwenden“ gespeichert.</string>
+    <string name="keybox_auto_fetch_url">Keybox-URL</string>
+    <string name="keybox_auto_fetch_url_desc">Leer lassen, um die Standardquelle zu verwenden.</string>
+    <string name="keybox_auto_fetch_proxy">Download-Proxy</string>
+    <string name="keybox_auto_fetch_proxy_desc">Optionale HTTPS-Proxy-Vorlage. Der Platzhalter %s wird durch die Keybox-URL ersetzt, zum Beispiel: https://gh-proxy.org/$url. Leer lassen, um direkt zu laden.</string>
+    <string name="keybox_auto_fetch_now">Jetzt abrufen</string>
+    <string name="keybox_auto_fetch_saved">Einstellungen für den automatischen Abruf gespeichert.</string>
+    <string name="keybox_auto_fetch_installed">Remote-Keybox geladen und installiert.</string>
+    <string name="keybox_auto_fetch_unchanged">Die Remote-Keybox entspricht bereits der installierten.</string>
+    <string name="keybox_auto_fetch_invalid_url">Keybox-URL und Proxy müssen leer sein oder mit https:// beginnen</string>
+    <string name="keybox_auto_fetch_preview">Nur Vorschau. Geräteeinstellungen können hier nicht gespeichert werden.</string>
+    <string name="keybox_auto_fetch_interval">Aktualisierungsintervall</string>
+    <string name="keybox_auto_fetch_interval_hours">Stunden</string>
+    <string name="keybox_auto_fetch_interval_minutes">Minuten</string>
+    <string name="keybox_auto_fetch_interval_desc">Der Abruf wiederholt sich in diesem Abstand, von 15 Minuten bis zu 7 Tagen. Änderungen greifen ab dem nächsten Aktualisierungszyklus.</string>
+    <string name="keybox_auto_fetch_invalid_interval">Das Aktualisierungsintervall muss zwischen 15 Minuten und 7 Tagen liegen.</string>
 </resources>

@@ -177,4 +177,24 @@
     <string name="soter_beta_reboot">Installez et activez Zygisk Next séparément. Redémarrez l'appareil après l'activation ou la désactivation. La compatibilité n'a pas été vérifiée.</string>
     <string name="soter_beta_saved">Paramètre Soter Bêta enregistré. Redémarrez l'appareil pour l'appliquer. La compatibilité n'a pas été vérifiée.</string>
     <string name="soter_beta_preview">Aperçu uniquement. Les paramètres de l'appareil ne peuvent pas être enregistrés ici.</string>
+    <string name="tools_keybox_auto_fetch">Récupération auto du Keybox</string>
+    <string name="tools_keybox_auto_fetch_desc">Télécharge un Keybox depuis une URL configurable et remplace celui installé s'il diffère.</string>
+    <string name="keybox_auto_fetch_warning">Une fois activé, un keybox.xml encodé en base64 est téléchargé en HTTPS depuis l'URL ci-dessous après le démarrage puis à l'intervalle configuré, et remplace le Keybox installé s'il diffère. N'utilisez qu'une source de confiance.</string>
+    <string name="keybox_auto_fetch_enabled">Activer la récupération auto</string>
+    <string name="keybox_auto_fetch_enabled_desc">Désactivé par défaut. Les changements ne sont enregistrés qu'après avoir touché Appliquer.</string>
+    <string name="keybox_auto_fetch_url">URL du Keybox</string>
+    <string name="keybox_auto_fetch_url_desc">Laissez vide pour utiliser la source par défaut.</string>
+    <string name="keybox_auto_fetch_proxy">Proxy de téléchargement</string>
+    <string name="keybox_auto_fetch_proxy_desc">Modèle de proxy HTTPS facultatif. Le %s est remplacé par l'URL du Keybox, par exemple : https://gh-proxy.org/$url. Laissez vide pour un téléchargement direct.</string>
+    <string name="keybox_auto_fetch_now">Récupérer maintenant</string>
+    <string name="keybox_auto_fetch_saved">Paramètres de récupération auto enregistrés.</string>
+    <string name="keybox_auto_fetch_installed">Keybox distant téléchargé et installé.</string>
+    <string name="keybox_auto_fetch_unchanged">Le Keybox distant correspond déjà à celui installé.</string>
+    <string name="keybox_auto_fetch_invalid_url">L'URL du Keybox et le proxy doivent être vides ou commencer par https://</string>
+    <string name="keybox_auto_fetch_preview">Aperçu seulement. Les paramètres de l'appareil ne peuvent pas être enregistrés ici.</string>
+    <string name="keybox_auto_fetch_interval">Intervalle de mise à jour</string>
+    <string name="keybox_auto_fetch_interval_hours">Heures</string>
+    <string name="keybox_auto_fetch_interval_minutes">Minutes</string>
+    <string name="keybox_auto_fetch_interval_desc">La récupération se répète à cet intervalle, de 15 minutes à 7 jours. Les changements s'appliquent à partir du prochain cycle.</string>
+    <string name="keybox_auto_fetch_invalid_interval">L'intervalle de mise à jour doit être compris entre 15 minutes et 7 jours.</string>
 </resources>

@@ -29,6 +29,7 @@ pub mod config;
 pub mod consts;
 pub mod global;
 pub mod keybox;
+pub mod keybox_remote;
 pub mod keymaster;
 pub mod keymint;
 pub mod logging;
@@ -366,6 +367,63 @@ fn handle_webui_keybox_command() -> Option<Result<String, String>> {
                 ));
             }
             Some(webui_keybox_revocation_status())
+        }
+        _ => None,
+    }
+}
+
+fn handle_webui_keybox_remote_command(
+    mut args: impl Iterator<Item = String>,
+) -> Option<Result<String, String>> {
+    let command = args.next()?;
+    match command.as_str() {
+        "--webui-get-keybox-remote-settings" => {
+            if args.next().is_some() {
+                return Some(Err(
+                    "--webui-get-keybox-remote-settings does not accept arguments".to_string(),
+                ));
+            }
+            prepare_android_storage();
+            Some(keybox_remote::settings_json().map_err(|error| format!("{error:#}")))
+        }
+        "--webui-set-keybox-remote-settings" => {
+            let Some(encoded_payload) = args.next() else {
+                return Some(Err(
+                    "--webui-set-keybox-remote-settings requires one base64 JSON payload"
+                        .to_string(),
+                ));
+            };
+            if args.next().is_some() {
+                return Some(Err(
+                    "--webui-set-keybox-remote-settings accepts exactly one base64 JSON payload"
+                        .to_string(),
+                ));
+            }
+            Some(
+                BASE64_STANDARD
+                    .decode(encoded_payload.as_bytes())
+                    .map_err(|error| anyhow::anyhow!("invalid settings payload encoding: {error}"))
+                    .and_then(|payload| keybox_remote::Settings::from_json_payload(&payload))
+                    .and_then(|settings| {
+                        prepare_android_storage();
+                        keybox_remote::save_settings(&settings)
+                    })
+                    .map(|()| "keybox_remote_saved".to_string())
+                    .map_err(|error| format!("{error:#}")),
+            )
+        }
+        "--webui-fetch-remote-keybox" => {
+            if args.next().is_some() {
+                return Some(Err(
+                    "--webui-fetch-remote-keybox does not accept arguments".to_string()
+                ));
+            }
+            prepare_android_storage();
+            Some(
+                keybox_remote::fetch_and_install()
+                    .map(str::to_string)
+                    .map_err(|error| format!("{error:#}")),
+            )
         }
         _ => None,
     }
@@ -714,6 +772,17 @@ fn main() {
         return;
     }
 
+    if let Some(result) = handle_webui_keybox_remote_command(std::env::args().skip(1)) {
+        match result {
+            Ok(output) => println!("{output}"),
+            Err(error) => {
+                eprintln!("{error}");
+                std::process::exit(2);
+            }
+        }
+        return;
+    }
+
     logging::init_logger();
     prepare_android_storage();
     panic::set_hook(Box::new(|panic_info| {
@@ -860,6 +929,33 @@ mod tests {
                     .is_err()
             );
         }
+    }
+
+    #[test]
+    fn webui_keybox_remote_rejects_invalid_arguments_before_storage_setup() {
+        // Only rejection paths are exercised here: a valid payload would make
+        // this helper persist the real settings file outside the test sandbox.
+        // Successful parsing and persistence are covered by keybox_remote's
+        // own tests.
+        for arguments in [
+            vec!["--webui-get-keybox-remote-settings", "1"],
+            vec!["--webui-fetch-remote-keybox", "1"],
+            vec!["--webui-set-keybox-remote-settings"],
+            vec!["--webui-set-keybox-remote-settings", "not-base64"],
+            vec!["--webui-set-keybox-remote-settings", "QUJD", "extra"],
+            vec![
+                "--webui-set-keybox-remote-settings",
+                // base64 of `{"enabled":true}` — missing fields.
+                "eyJlbmFibGVkIjp0cnVlfQ==",
+            ],
+        ] {
+            let result = handle_webui_keybox_remote_command(
+                arguments.clone().into_iter().map(str::to_string),
+            )
+            .unwrap();
+            assert!(result.is_err(), "{arguments:?} should be rejected");
+        }
+        assert!(handle_webui_keybox_remote_command(std::iter::empty()).is_none());
     }
 
     #[test]

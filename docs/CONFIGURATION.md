@@ -62,11 +62,15 @@ change does not require a keymint restart.
 ## Embedded WebUI
 
 The module includes a WebUI for selecting packages in `scoop`, installing a
-local keybox, managing the Android security patch level, applying a Pixel
+local keybox, automatically fetching a Keybox from a configured source,
+managing the Android security patch level, applying a Pixel
 PIF fingerprint through OMK's own Zygisk payload, configuring ADB Disabler,
 and independently enabling Tencent Soter compatibility (Beta).
 ADB Disabler controls developer options, USB debugging, and OEM unlock and
-reapplies the selected settings at boot. Open it from the Oh My Keymint module page in
+reapplies the selected settings at boot. The WebUI requires Android System
+WebView 94 or newer; older versions show an instruction to update the
+WebView, and newer features degrade gracefully where the runtime lacks a
+capability. Open it from the Oh My Keymint module page in
 KernelSU. With Magisk, open an installed KSUWebUIStandalone or WebUI X host and
 select Oh My Keymint; the module does not install either host.
 
@@ -175,6 +179,31 @@ any installed storage provider, including MT Manager, and requests all MIME
 types so providers that label XML as `text/plain` or `application/octet-stream`
 remain available; the WebUI still requires an `.xml` filename. If the system
 picker cannot be opened, the WebUI falls back to its shared-storage browser.
+
+The Tools page also provides **Auto fetch Keybox**. It is disabled by default.
+When enabled, the module downloads a base64-encoded `keybox.xml` over HTTPS
+from `https://raw.githubusercontent.com/Yurii0307/yurikey/main/key`, decodes
+it, and replaces `/data/misc/keystore/omk/keybox.xml` whenever the decoded
+content differs from the installed Keybox. A custom source URL can be
+configured, and a proxy template rewrites the request: `$url` inside the
+template is replaced by the source URL, and a template without the placeholder
+is used as a prefix. The proxy is preset to `https://gh-proxy.org/$url`, which
+fetches the default source through the gh-proxy mirror; clearing the field
+fetches directly and any other template is used as configured. The first fetch
+runs after boot with retries while the network comes up, and the configured
+source is re-checked at the configured update interval; both runs are skipped
+while the feature is disabled. The interval is entered as hours and minutes,
+from 15 minutes up to 7 days, with six hours as the default; a changed
+interval applies from the next refresh cycle. **Fetch now** performs the same
+download and comparison on demand.
+The source URL and proxy must be empty or use `https` and must not embed
+credentials. Downloads use the module's native HTTPS client with embedded
+WebPKI roots and are limited in size and time; the decoded payload is validated
+exactly like a local import before it replaces the file, so a failed or
+invalid fetch leaves the active keybox unchanged. The switch, URL, proxy, and
+interval persist in `/data/misc/keystore/omk/data/keybox_remote.conf` (four
+lines: enabled, URL, proxy, interval minutes), and a successful
+replacement is recorded in the activity log.
 Its **Sync security
 patch** action uses the root WebUI bridge to make an HTTPS request to the
 official `https://source.android.com/docs/security/bulletin/asb-overview` page,

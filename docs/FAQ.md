@@ -159,8 +159,12 @@ picker can use another installed storage app such as MT Manager and requests
 all MIME types because providers may label XML as `text/plain` or
 `application/octet-stream`; the WebUI still requires an `.xml` filename. If the
 system picker cannot be opened, the WebUI falls back to its shared-storage
-browser. It does not change `[crypto]`, device identity, or unrelated
-configuration settings.
+browser. The Tools page can additionally fetch a Keybox automatically over
+HTTPS from a configurable source, with a preset proxy template that can be
+changed or cleared, and replace the active keybox when the downloaded copy
+differs; this fetch is disabled by default, and its refresh interval is
+configurable between 15 minutes and 7 days. Neither action changes
+`[crypto]`, device identity, or unrelated configuration settings.
 
 The Home page checks every certificate serial number in the active Keybox
 against Google's attestation status list. The validated local cache is used for
@@ -220,9 +224,10 @@ Edit the active files, not the copies inside the module ZIP. Make a backup
 first and use a root-capable editor that preserves the files correctly.
 The [Configuration Guide](CONFIGURATION.md) explains every field and when each
 kind of change takes effect. The embedded WebUI is an optional editor for
-`scoop`, an installer for a locally selected keybox, and controls for syncing
-or restoring the four security-patch fields and the two corresponding runtime
-properties; it does not expose the other settings.
+`scoop`, an installer for a locally selected keybox, a switch and inputs for
+automatically fetching a Keybox from a configured source, and controls for
+syncing or restoring the four security-patch fields and the two corresponding
+runtime properties; it does not expose the other settings.
 
 ### What is `scoop`?
 

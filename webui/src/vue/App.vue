@@ -22,6 +22,7 @@ import { i18n } from '../i18n'
 import { fetchLatestSecurityPatch } from '../security_patch'
 import { isDev } from '../utils/dev'
 import HomeView, { type KeyboxStatus, type ModuleStatus, type TeeStatus } from './HomeView.vue'
+import KeyboxAutoFetchDialog from './KeyboxAutoFetchDialog.vue'
 import PifFingerprintDialog from './PifFingerprintDialog.vue'
 import SettingsView from './SettingsView.vue'
 import SoterDialog from './SoterDialog.vue'
@@ -63,12 +64,14 @@ const adbOemUnlock = ref(true)
 const soterOpen = ref(false)
 const pifOpen = ref(false)
 const keyboxOpen = ref(false)
+const keyboxAutoFetchOpen = ref(false)
 const selectedKeybox = ref<{ name: string, contents: Uint8Array } | null>(null)
 const keyboxBusy = ref(false)
 const targetsView = ref<InstanceType<typeof TargetsView> | null>(null)
 const settingsView = ref<InstanceType<typeof SettingsView> | null>(null)
 const pifDialog = ref<InstanceType<typeof PifFingerprintDialog> | null>(null)
 const soterDialog = ref<InstanceType<typeof SoterDialog> | null>(null)
+const keyboxAutoFetchDialog = ref<InstanceType<typeof KeyboxAutoFetchDialog> | null>(null)
 
 const pageIds = ['home', 'tools', 'settings'] as const
 const navItems = computed(() => [
@@ -279,6 +282,7 @@ function onTargetsOverlayClose(): void {
 
 function handleEscape(): void {
   if (soterOpen.value && soterDialog.value?.busy) return
+  if (keyboxAutoFetchOpen.value && keyboxAutoFetchDialog.value?.busy) return
   if (targetsOpen.value && targetsView.value?.dismissOverlay()) return
   if (history.size > 0) history.back()
 }
@@ -451,6 +455,7 @@ function onTool(event: ToolEvent): void {
   switch (event) {
     case 'openAppTargets': openTargets(); break
     case 'installKeybox': void chooseKeybox(); break
+    case 'openKeyboxAutoFetch': keyboxAutoFetchOpen.value = true; break
     case 'syncSecurityPatch': void syncPatch(false); break
     case 'restoreSecurityPatch': void syncPatch(true); break
     case 'openAdbDisabler': void openAdbDisabler(); break
@@ -605,6 +610,23 @@ watch(soterOpen, open => {
   if (open) trackSoterOverlay()
   else if (overlayHistory.delete('soter-beta')) history.consume('soter-beta')
 })
+function trackKeyboxAutoFetchOverlay(): void {
+  const key = 'keybox-auto-fetch'
+  if (!keyboxAutoFetchOpen.value || overlayHistory.has(key)) return
+  overlayHistory.add(key)
+  history.push(key, () => {
+    overlayHistory.delete(key)
+    if (keyboxAutoFetchDialog.value?.requestClose() === false) {
+      // Re-arm after the current popstate handler finishes so a busy dialog
+      // does not lose its back entry or close the page beneath it.
+      void nextTick(trackKeyboxAutoFetchOverlay)
+    }
+  })
+}
+watch(keyboxAutoFetchOpen, open => {
+  if (open) trackKeyboxAutoFetchOverlay()
+  else if (overlayHistory.delete('keybox-auto-fetch')) history.consume('keybox-auto-fetch')
+})
 watch(keyboxOpen, open => {
   if (open && !overlayHistory.has('keybox')) {
     overlayHistory.add('keybox')
@@ -639,6 +661,7 @@ watch(keyboxOpen, open => {
           :adb-busy="adbBusy"
           @open-app-targets="onTool('openAppTargets')"
           @install-keybox="onTool('installKeybox')"
+          @open-keybox-auto-fetch="onTool('openKeyboxAutoFetch')"
           @sync-security-patch="onTool('syncSecurityPatch')"
           @restore-security-patch="onTool('restoreSecurityPatch')"
           @open-adb-disabler="onTool('openAdbDisabler')"
@@ -761,6 +784,13 @@ watch(keyboxOpen, open => {
       @changed="refreshIdentity(true); refreshActivity()"
     />
     <SoterDialog ref="soterDialog" v-model="soterOpen" :cli="cli" @notify="notify" />
+    <KeyboxAutoFetchDialog
+      ref="keyboxAutoFetchDialog"
+      v-model="keyboxAutoFetchOpen"
+      :cli="cli"
+      @notify="notify"
+      @changed="refreshIdentity(true); refreshActivity()"
+    />
     <MiuixSnackbarHost />
   </div>
 </template>

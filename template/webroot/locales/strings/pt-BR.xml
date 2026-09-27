@@ -177,4 +177,24 @@
     <string name="soter_beta_reboot">Instale e ative o Zygisk Next separadamente. Reinicie o dispositivo após ativar ou desativar. A compatibilidade não foi verificada.</string>
     <string name="soter_beta_saved">Configuração do Soter Beta salva. Reinicie o dispositivo para aplicar. A compatibilidade não foi verificada.</string>
     <string name="soter_beta_preview">Apenas prévia. As configurações do dispositivo não podem ser salvas aqui.</string>
+    <string name="tools_keybox_auto_fetch">Buscar Keybox automaticamente</string>
+    <string name="tools_keybox_auto_fetch_desc">Baixa um Keybox de uma URL configurável e substitui o instalado quando for diferente.</string>
+    <string name="keybox_auto_fetch_warning">Quando ativado, um keybox.xml codificado em base64 é baixado por HTTPS da URL abaixo após a inicialização e no intervalo configurado, substituindo o Keybox instalado quando for diferente. Use apenas uma fonte confiável.</string>
+    <string name="keybox_auto_fetch_enabled">Ativar busca automática</string>
+    <string name="keybox_auto_fetch_enabled_desc">Desativado por padrão. As alterações só são salvas após tocar em Aplicar.</string>
+    <string name="keybox_auto_fetch_url">URL do Keybox</string>
+    <string name="keybox_auto_fetch_url_desc">Deixe vazio para usar a fonte padrão.</string>
+    <string name="keybox_auto_fetch_proxy">Proxy de download</string>
+    <string name="keybox_auto_fetch_proxy_desc">Modelo de proxy HTTPS opcional. O %s é substituído pela URL do Keybox, por exemplo: https://gh-proxy.org/$url. Deixe vazio para baixar diretamente.</string>
+    <string name="keybox_auto_fetch_now">Buscar agora</string>
+    <string name="keybox_auto_fetch_saved">Configurações de busca automática salvas.</string>
+    <string name="keybox_auto_fetch_installed">Keybox remoto baixado e instalado.</string>
+    <string name="keybox_auto_fetch_unchanged">O Keybox remoto já corresponde ao instalado.</string>
+    <string name="keybox_auto_fetch_invalid_url">A URL do Keybox e o proxy devem estar vazios ou começar com https://</string>
+    <string name="keybox_auto_fetch_preview">Apenas pré-visualização. As configurações do dispositivo não podem ser salvas aqui.</string>
+    <string name="keybox_auto_fetch_interval">Intervalo de atualização</string>
+    <string name="keybox_auto_fetch_interval_hours">Horas</string>
+    <string name="keybox_auto_fetch_interval_minutes">Minutos</string>
+    <string name="keybox_auto_fetch_interval_desc">A busca se repete nesse intervalo, de 15 minutos a 7 dias. As alterações valem a partir do próximo ciclo.</string>
+    <string name="keybox_auto_fetch_invalid_interval">O intervalo de atualização deve estar entre 15 minutos e 7 dias.</string>
 </resources>

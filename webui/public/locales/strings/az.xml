@@ -177,4 +177,24 @@
     <string name="soter_beta_reboot">Zygisk Next-i ayrıca quraşdırın və aktivləşdirin. Aktivləşdirdikdən və ya söndürdükdən sonra cihazı yenidən başladın. Uyğunluq yoxlanılmayıb.</string>
     <string name="soter_beta_saved">Soter Beta ayarı saxlanıldı. Tətbiq etmək üçün cihazı yenidən başladın. Uyğunluq yoxlanılmayıb.</string>
     <string name="soter_beta_preview">Yalnız önbaxışdır. Cihaz ayarları burada saxlanıla bilməz.</string>
+    <string name="tools_keybox_auto_fetch">Keybox-u avtomatik əldə et</string>
+    <string name="tools_keybox_auto_fetch_desc">Konfiqurasiya olunan URL-dən Keybox yükləyir və fərqlidirsə quraşdırılmışı əvəz edir.</string>
+    <string name="keybox_auto_fetch_warning">Aktiv olanda hər açılışdan sonra və konfiqurasiya olunmuş intervalda aşağıdakı URL-dən HTTPS üzərindən base64 ilə kodlanmış keybox.xml yüklənir və fərqlidirsə quraşdırılmış Keybox-u əvəz edir. Yalnız etibarlı mənbədən istifadə edin.</string>
+    <string name="keybox_auto_fetch_enabled">Avtomatik əldə etməni aktivləşdir</string>
+    <string name="keybox_auto_fetch_enabled_desc">Standart olaraq deaktivdir. Dəyişikliklər yalnız Tətbiq etməyə toxunduqdan sonra yadda saxlanılır.</string>
+    <string name="keybox_auto_fetch_url">Keybox URL-si</string>
+    <string name="keybox_auto_fetch_url_desc">Standart mənbədən istifadə üçün boş buraxın.</string>
+    <string name="keybox_auto_fetch_proxy">Yükləmə proksisi</string>
+    <string name="keybox_auto_fetch_proxy_desc">İstəyə bağlı HTTPS proksi şablonu. %s yer tutucusu Keybox URL-si ilə əvəz olunur, məsələn: https://gh-proxy.org/$url. Birbaşa yükləmə üçün boş buraxın.</string>
+    <string name="keybox_auto_fetch_now">İndi əldə et</string>
+    <string name="keybox_auto_fetch_saved">Avtomatik əldə etmə parametrləri yadda saxlanıldı.</string>
+    <string name="keybox_auto_fetch_installed">Uzaq Keybox yükləndi və quraşdırıldı.</string>
+    <string name="keybox_auto_fetch_unchanged">Uzaq Keybox artıq quraşdırılmışla üst-üstə düşür.</string>
+    <string name="keybox_auto_fetch_invalid_url">Keybox URL-si və proksi boş olmalı və ya https:// ilə başlamalıdır</string>
+    <string name="keybox_auto_fetch_preview">Yalnız önizləmə. Cihaz parametrlərini burada yadda saxlamaq olmaz.</string>
+    <string name="keybox_auto_fetch_interval">Yeniləmə intervalı</string>
+    <string name="keybox_auto_fetch_interval_hours">Saat</string>
+    <string name="keybox_auto_fetch_interval_minutes">Dəqiqə</string>
+    <string name="keybox_auto_fetch_interval_desc">Əldə etmə bu intervalda təkrarlanır, 15 dəqiqədən 7 günə qədər. Dəyişikliklər növbəti dövrdən tətbiq olunur.</string>
+    <string name="keybox_auto_fetch_invalid_interval">Yeniləmə intervalı 15 dəqiqə ilə 7 gün arasında olmalıdır.</string>
 </resources>

@@ -177,4 +177,24 @@
     <string name="soter_beta_reboot">Zygisk Next را جداگانه نصب و فعال کنید. پس از فعال یا غیرفعال کردن، دستگاه را راه‌اندازی مجدد کنید. سازگاری تأیید نشده است.</string>
     <string name="soter_beta_saved">تنظیم Soter بتا ذخیره شد. برای اعمال، دستگاه را راه‌اندازی مجدد کنید. سازگاری تأیید نشده است.</string>
     <string name="soter_beta_preview">فقط پیش‌نمایش است. تنظیمات دستگاه را نمی‌توان اینجا ذخیره کرد.</string>
+    <string name="tools_keybox_auto_fetch">دریافت خودکار Keybox</string>
+    <string name="tools_keybox_auto_fetch_desc">یک Keybox از URL قابل تنظیم دانلود و در صورت تفاوت، جایگزین نصب‌شده می‌شود.</string>
+    <string name="keybox_auto_fetch_warning">در صورت فعال بودن، پس از بوت و در فاصله زمانی تنظیم‌شده یک keybox.xml کدگذاری‌شده با base64 از طریق HTTPS از نشانی زیر دانلود و در صورت تفاوت با Keybox نصب‌شده جایگزین آن می‌شود. فقط از منبع مورد اعتماد استفاده کنید.</string>
+    <string name="keybox_auto_fetch_enabled">فعال‌سازی دریافت خودکار</string>
+    <string name="keybox_auto_fetch_enabled_desc">به‌طور پیش‌فرض غیرفعال است. تغییرات تنها پس از لمس «اعمال» ذخیره می‌شود.</string>
+    <string name="keybox_auto_fetch_url">نشانی Keybox</string>
+    <string name="keybox_auto_fetch_url_desc">برای استفاده از منبع پیش‌فرض خالی بگذارید.</string>
+    <string name="keybox_auto_fetch_proxy">پروکسی دانلود</string>
+    <string name="keybox_auto_fetch_proxy_desc">الگوی اختیاری پروکسی HTTPS. جای‌نگهدار %s با نشانی Keybox جایگزین می‌شود، برای مثال: https://gh-proxy.org/$url. برای دانلود مستقیم خالی بگذارید.</string>
+    <string name="keybox_auto_fetch_now">دریافت فوری</string>
+    <string name="keybox_auto_fetch_saved">تنظیمات دریافت خودکار ذخیره شد.</string>
+    <string name="keybox_auto_fetch_installed">Keybox از راه دور دانلود و نصب شد.</string>
+    <string name="keybox_auto_fetch_unchanged">Keybox از راه دور با نصب‌شده یکسان است.</string>
+    <string name="keybox_auto_fetch_invalid_url">نشانی Keybox و پروکسی باید خالی یا با https:// شروع شوند</string>
+    <string name="keybox_auto_fetch_preview">فقط پیش‌نمایش. تنظیمات دستگاه اینجا ذخیره نمی‌شود.</string>
+    <string name="keybox_auto_fetch_interval">فاصله به‌روزرسانی</string>
+    <string name="keybox_auto_fetch_interval_hours">ساعت</string>
+    <string name="keybox_auto_fetch_interval_minutes">دقیقه</string>
+    <string name="keybox_auto_fetch_interval_desc">دریافت در این فاصله تکرار می‌شود، از ۱۵ دقیقه تا ۷ روز. تغییرات از چرخه بعدی اعمال می‌شود.</string>
+    <string name="keybox_auto_fetch_invalid_interval">فاصله به‌روزرسانی باید بین ۱۵ دقیقه و ۷ روز باشد.</string>
 </resources>

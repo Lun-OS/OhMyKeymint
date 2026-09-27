@@ -177,4 +177,24 @@
     <string name="soter_beta_reboot">Cài đặt và bật Zygisk Next riêng. Khởi động lại thiết bị sau khi bật hoặc tắt. Khả năng tương thích chưa được xác minh.</string>
     <string name="soter_beta_saved">Đã lưu cài đặt Soter Beta. Khởi động lại thiết bị để áp dụng. Khả năng tương thích chưa được xác minh.</string>
     <string name="soter_beta_preview">Chỉ xem trước. Không thể lưu cài đặt thiết bị tại đây.</string>
+    <string name="tools_keybox_auto_fetch">Tự động lấy Keybox</string>
+    <string name="tools_keybox_auto_fetch_desc">Tải Keybox từ một URL cấu hình được và thay thế Keybox đã cài khi khác biệt.</string>
+    <string name="keybox_auto_fetch_warning">Khi bật, tệp keybox.xml mã hóa base64 sẽ được tải qua HTTPS từ URL bên dưới sau khi khởi động và theo khoảng thời gian đã cấu hình, đồng thời thay thế Keybox đã cài nếu khác biệt. Chỉ dùng nguồn bạn tin tưởng.</string>
+    <string name="keybox_auto_fetch_enabled">Bật tự động lấy</string>
+    <string name="keybox_auto_fetch_enabled_desc">Mặc định tắt. Thay đổi chỉ được lưu sau khi chạm Áp dụng.</string>
+    <string name="keybox_auto_fetch_url">URL Keybox</string>
+    <string name="keybox_auto_fetch_url_desc">Để trống để dùng nguồn mặc định.</string>
+    <string name="keybox_auto_fetch_proxy">Proxy tải xuống</string>
+    <string name="keybox_auto_fetch_proxy_desc">Mẫu proxy HTTPS tùy chọn. Trình giữ chỗ %s được thay bằng URL Keybox, ví dụ: https://gh-proxy.org/$url. Để trống để tải trực tiếp.</string>
+    <string name="keybox_auto_fetch_now">Lấy ngay</string>
+    <string name="keybox_auto_fetch_saved">Đã lưu cài đặt tự động lấy.</string>
+    <string name="keybox_auto_fetch_installed">Đã tải và cài đặt Keybox từ xa.</string>
+    <string name="keybox_auto_fetch_unchanged">Keybox từ xa đã khớp với Keybox đã cài.</string>
+    <string name="keybox_auto_fetch_invalid_url">URL Keybox và proxy phải để trống hoặc bắt đầu bằng https://</string>
+    <string name="keybox_auto_fetch_preview">Chỉ xem trước. Không thể lưu cài đặt thiết bị tại đây.</string>
+    <string name="keybox_auto_fetch_interval">Khoảng thời gian cập nhật</string>
+    <string name="keybox_auto_fetch_interval_hours">Giờ</string>
+    <string name="keybox_auto_fetch_interval_minutes">Phút</string>
+    <string name="keybox_auto_fetch_interval_desc">Việc tải lặp lại theo khoảng thời gian này, từ 15 phút đến 7 ngày. Thay đổi có hiệu lực từ chu kỳ làm mới tiếp theo.</string>
+    <string name="keybox_auto_fetch_invalid_interval">Khoảng thời gian cập nhật phải từ 15 phút đến 7 ngày.</string>
 </resources>

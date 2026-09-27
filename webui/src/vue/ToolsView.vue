@@ -7,12 +7,13 @@ import {
   MiuixSmallTitle,
   MiuixTopAppBar,
 } from 'miuix-vue'
-import { AddCircle, Lock, Replace, Reset, Tune, Update } from 'miuix-vue/icons'
+import { AddCircle, Lock, Refresh, Replace, Reset, Tune, Update } from 'miuix-vue/icons'
 import { i18n } from '../i18n'
 
 export type ToolEvent =
   | 'openAppTargets'
   | 'installKeybox'
+  | 'openKeyboxAutoFetch'
   | 'syncSecurityPatch'
   | 'restoreSecurityPatch'
   | 'openAdbDisabler'
@@ -29,6 +30,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   openAppTargets: []
   installKeybox: []
+  openKeyboxAutoFetch: []
   syncSecurityPatch: []
   restoreSecurityPatch: []
   openAdbDisabler: []
@@ -40,6 +42,7 @@ function runTool(event: ToolEvent): void {
   switch (event) {
     case 'openAppTargets': emit('openAppTargets'); break
     case 'installKeybox': emit('installKeybox'); break
+    case 'openKeyboxAutoFetch': emit('openKeyboxAutoFetch'); break
     case 'syncSecurityPatch': emit('syncSecurityPatch'); break
     case 'restoreSecurityPatch': emit('restoreSecurityPatch'); break
     case 'openAdbDisabler': emit('openAdbDisabler'); break
@@ -71,6 +74,12 @@ const groups = [
         icon: Replace,
         title: tr('menu_replace_keybox', 'Change Keybox'),
         summary: tr('tools_keybox_desc', 'Choose a Keybox.xml file and install it for Oh My Keymint.'),
+      },
+      {
+        event: 'openKeyboxAutoFetch' as const,
+        icon: Refresh,
+        title: tr('tools_keybox_auto_fetch', 'Auto fetch Keybox'),
+        summary: tr('tools_keybox_auto_fetch_desc', 'Download a Keybox from a configurable URL and replace the installed one when it differs.'),
       },
       {
         event: 'openAdbDisabler' as const,

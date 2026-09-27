@@ -177,4 +177,24 @@
     <string name="soter_beta_reboot">Установите и включите Zygisk Next отдельно. После включения или выключения перезагрузите устройство. Совместимость не проверена.</string>
     <string name="soter_beta_saved">Настройка Soter Бета сохранена. Перезагрузите устройство для применения. Совместимость не проверена.</string>
     <string name="soter_beta_preview">Только предпросмотр. Здесь нельзя сохранить настройки устройства.</string>
+    <string name="tools_keybox_auto_fetch">Автополучение Keybox</string>
+    <string name="tools_keybox_auto_fetch_desc">Скачивает Keybox по настраиваемому URL и заменяет установленный, если он отличается.</string>
+    <string name="keybox_auto_fetch_warning">Если включено, после загрузки устройства и далее с настроенным интервалом по HTTPS скачивается закодированный в base64 keybox.xml с указанного ниже URL и заменяет установленный Keybox при отличии. Используйте только доверенный источник.</string>
+    <string name="keybox_auto_fetch_enabled">Включить автополучение</string>
+    <string name="keybox_auto_fetch_enabled_desc">По умолчанию отключено. Изменения сохраняются только после нажатия «Применить».</string>
+    <string name="keybox_auto_fetch_url">URL Keybox</string>
+    <string name="keybox_auto_fetch_url_desc">Оставьте пустым, чтобы использовать источник по умолчанию.</string>
+    <string name="keybox_auto_fetch_proxy">Прокси для загрузки</string>
+    <string name="keybox_auto_fetch_proxy_desc">Необязательный шаблон HTTPS-прокси. Подстановка %s заменяется на URL Keybox, например: https://gh-proxy.org/$url. Оставьте пустым для прямой загрузки.</string>
+    <string name="keybox_auto_fetch_now">Получить сейчас</string>
+    <string name="keybox_auto_fetch_saved">Настройки автополучения сохранены.</string>
+    <string name="keybox_auto_fetch_installed">Удалённый Keybox скачан и установлен.</string>
+    <string name="keybox_auto_fetch_unchanged">Удалённый Keybox уже совпадает с установленным.</string>
+    <string name="keybox_auto_fetch_invalid_url">URL Keybox и прокси должны быть пустыми или начинаться с https://</string>
+    <string name="keybox_auto_fetch_preview">Только предпросмотр. Настройки устройства здесь сохранить нельзя.</string>
+    <string name="keybox_auto_fetch_interval">Интервал обновления</string>
+    <string name="keybox_auto_fetch_interval_hours">Часы</string>
+    <string name="keybox_auto_fetch_interval_minutes">Минуты</string>
+    <string name="keybox_auto_fetch_interval_desc">Получение повторяется с этим интервалом, от 15 минут до 7 дней. Изменения применяются со следующего цикла.</string>
+    <string name="keybox_auto_fetch_invalid_interval">Интервал обновления должен быть от 15 минут до 7 дней.</string>
 </resources>

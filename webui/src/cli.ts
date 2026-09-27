@@ -12,6 +12,7 @@ const SUPPORTED_ABIS = ['arm64-v8a', 'x86_64'] as const
 type SupportedAbi = typeof SUPPORTED_ABIS[number]
 type HelperPaths = { abi: SupportedAbi, inject: string, keymint: string }
 const KEYBOX_BASE64_CHUNK_BYTES = 48 * 1024
+const MAX_REMOTE_SETTING_LENGTH = 2048
 const MAX_BULLETIN_BYTES = 2 * 1024 * 1024
 const MAX_PIF_CATALOG_BYTES = 64 * 1024
 const MAX_PIF_STATE_BYTES = 2 * 1024
@@ -43,6 +44,11 @@ export interface ActivityEntry {
 }
 
 export const MAX_KEYBOX_XML_BYTES = 64 * 1024
+
+/** Mirrors src/keybox_remote.rs. Empty stored values mean these defaults. */
+export const DEFAULT_KEYBOX_REMOTE_URL = 'https://raw.githubusercontent.com/Yurii0307/yurikey/main/key'
+/** Mirrors src/keybox_remote.rs; `$url` is replaced by the Keybox URL. */
+export const DEFAULT_KEYBOX_REMOTE_PROXY = 'https://gh-proxy.org/$url'
 
 export interface PifDevice {
   model: string
@@ -89,6 +95,21 @@ export interface KeyboxState {
   play_integrity: PlayIntegrityStatus
   revocation: KeyboxRevocationStatus
 }
+
+export interface KeyboxRemoteSettings {
+  enabled: boolean
+  url: string
+  proxy: string
+  /** Periodic refresh interval in minutes (15..10080). */
+  interval_minutes: number
+}
+
+/** Mirrors src/keybox_remote.rs. */
+export const MIN_KEYBOX_REMOTE_INTERVAL_MINUTES = 15
+/** Mirrors src/keybox_remote.rs. */
+export const MAX_KEYBOX_REMOTE_INTERVAL_MINUTES = 7 * 24 * 60
+
+export type KeyboxRemoteFetchResult = 'installed' | 'unchanged'
 
 function parseCanonicalJson(output: string, description: string): unknown {
   let parsed: unknown
@@ -311,6 +332,67 @@ export class Cli {
     const output = await this.#run(keymint, ['--webui-check-keybox-revocation'], 256)
     if (output !== 'not_listed' && output !== 'suspended' && output !== 'revoked') {
       throw new Error('OMK returned an invalid Keybox revocation status')
+    }
+    return output
+  }
+
+  async getKeyboxRemoteSettings(): Promise<KeyboxRemoteSettings> {
+    const { keymint } = await this.#getHelperPaths()
+    const output = await this.#run(keymint, ['--webui-get-keybox-remote-settings'], 8192)
+    const parsed = parseCanonicalJson(output, 'Keybox auto fetch settings')
+    if (!isRecord(parsed)
+        || !hasOnlyKeys(parsed, ['enabled', 'url', 'proxy', 'interval_minutes'])
+        || typeof parsed.enabled !== 'boolean'
+        || typeof parsed.url !== 'string'
+        || typeof parsed.proxy !== 'string'
+        || typeof parsed.interval_minutes !== 'number'
+        || !Number.isInteger(parsed.interval_minutes)
+        || parsed.interval_minutes < MIN_KEYBOX_REMOTE_INTERVAL_MINUTES
+        || parsed.interval_minutes > MAX_KEYBOX_REMOTE_INTERVAL_MINUTES
+        || parsed.url.length > MAX_REMOTE_SETTING_LENGTH
+        || parsed.proxy.length > MAX_REMOTE_SETTING_LENGTH
+        || /[\u0000-\u001f\u007f]/.test(parsed.url)
+        || /[\u0000-\u001f\u007f]/.test(parsed.proxy)) {
+      throw new Error('OMK returned invalid Keybox auto fetch settings')
+    }
+    return {
+      enabled: parsed.enabled,
+      url: parsed.url,
+      proxy: parsed.proxy,
+      interval_minutes: parsed.interval_minutes,
+    }
+  }
+
+  async setKeyboxRemoteSettings(
+    enabled: boolean,
+    url: string,
+    proxy: string,
+    intervalMinutes: number,
+  ): Promise<void> {
+    if (url.length > MAX_REMOTE_SETTING_LENGTH || proxy.length > MAX_REMOTE_SETTING_LENGTH) {
+      throw new Error('Keybox auto fetch settings exceed the length limit')
+    }
+    // The whole settings object travels as one base64 JSON argument so no
+    // empty or shell-sensitive value ever crosses the KernelSU WebUI bridge;
+    // an empty url/proxy selects the built-in default / direct fetch.
+    const payload = encodeBase64Utf8(JSON.stringify({
+      enabled,
+      url: url.trim(),
+      proxy: proxy.trim(),
+      interval_minutes: intervalMinutes,
+    }))
+    const { keymint } = await this.#getHelperPaths()
+    const output = await this.#run(keymint, ['--webui-set-keybox-remote-settings', payload], 256)
+    if (output !== 'keybox_remote_saved') {
+      throw new Error('OMK returned an unexpected Keybox auto fetch result')
+    }
+  }
+
+  async fetchRemoteKeybox(): Promise<KeyboxRemoteFetchResult> {
+    const { keymint } = await this.#getHelperPaths()
+    const output = await this.#run(keymint, ['--webui-fetch-remote-keybox'], 256)
+    if (output !== 'installed' && output !== 'unchanged') {
+      throw new Error('OMK returned an unexpected remote Keybox result')
     }
     return output
   }

@@ -177,4 +177,24 @@
     <string name="soter_beta_reboot">ثبّت Zygisk Next وفعّله بشكل منفصل. أعد تشغيل الجهاز بعد التفعيل أو التعطيل. لم يتم التحقق من التوافق.</string>
     <string name="soter_beta_saved">تم حفظ إعداد Soter التجريبي. أعد تشغيل الجهاز للتطبيق. لم يتم التحقق من التوافق.</string>
     <string name="soter_beta_preview">معاينة فقط. لا يمكن حفظ إعدادات الجهاز هنا.</string>
+    <string name="tools_keybox_auto_fetch">جلب Keybox تلقائيًا</string>
+    <string name="tools_keybox_auto_fetch_desc">تنزيل Keybox من عنوان URL قابل للتخصيص واستبدال المثبّت عند اختلافه.</string>
+    <string name="keybox_auto_fetch_warning">عند التمكين، يتم تنزيل ملف keybox.xml المرمّز بـ base64 عبر HTTPS من عنوان URL أدناه بعد الإقلاع وعلى الفترة المحددة، مع استبدال Keybox المثبّت عند اختلافه. استخدم مصدرًا تثق به فقط.</string>
+    <string name="keybox_auto_fetch_enabled">تمكين الجلب التلقائي</string>
+    <string name="keybox_auto_fetch_enabled_desc">معطّل افتراضيًا. لا تُحفظ التغييرات إلا بعد الضغط على تطبيق.</string>
+    <string name="keybox_auto_fetch_url">عنوان URL الخاص بـ Keybox</string>
+    <string name="keybox_auto_fetch_url_desc">اتركه فارغًا لاستخدام المصدر الافتراضي.</string>
+    <string name="keybox_auto_fetch_proxy">وكيل التنزيل</string>
+    <string name="keybox_auto_fetch_proxy_desc">قالب وكيل HTTPS اختياري. يتم استبدال العنصر النائب %s بعنوان URL الخاص بـ Keybox، على سبيل المثال: https://gh-proxy.org/$url. اتركه فارغًا للتنزيل المباشر.</string>
+    <string name="keybox_auto_fetch_now">الجلب الآن</string>
+    <string name="keybox_auto_fetch_saved">تم حفظ إعدادات الجلب التلقائي.</string>
+    <string name="keybox_auto_fetch_installed">تم تنزيل Keybox البعيد وتثبيته.</string>
+    <string name="keybox_auto_fetch_unchanged">Keybox البعيد يطابق المثبّت بالفعل.</string>
+    <string name="keybox_auto_fetch_invalid_url">يجب أن يكون عنوان URL الخاص بـ Keybox والوكيل فارغين أو يبدآن بـ https://</string>
+    <string name="keybox_auto_fetch_preview">معاينة فقط. لا يمكن حفظ إعدادات الجهاز هنا.</string>
+    <string name="keybox_auto_fetch_interval">فترة التحديث</string>
+    <string name="keybox_auto_fetch_interval_hours">ساعات</string>
+    <string name="keybox_auto_fetch_interval_minutes">دقائق</string>
+    <string name="keybox_auto_fetch_interval_desc">يتكرر الجلب بهذه الفترة، من 15 دقيقة إلى 7 أيام. تسري التغييرات من دورة التحديث التالية.</string>
+    <string name="keybox_auto_fetch_invalid_interval">يجب أن تكون فترة التحديث بين 15 دقيقة و7 أيام.</string>
 </resources>

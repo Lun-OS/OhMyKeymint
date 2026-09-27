@@ -177,4 +177,24 @@
     <string name="soter_beta_reboot">ติดตั้งและเปิดใช้งาน Zygisk Next แยกต่างหาก รีสตาร์ทอุปกรณ์หลังจากเปิดหรือปิดฟังก์ชันนี้ ยังไม่ได้ยืนยันความเข้ากันได้</string>
     <string name="soter_beta_saved">บันทึกการตั้งค่า Soter เบตาแล้ว รีสตาร์ทอุปกรณ์เพื่อนำไปใช้ ยังไม่ได้ยืนยันความเข้ากันได้</string>
     <string name="soter_beta_preview">ตัวอย่างเท่านั้น ไม่สามารถบันทึกการตั้งค่าอุปกรณ์ที่นี่ได้</string>
+    <string name="tools_keybox_auto_fetch">ดึง Keybox อัตโนมัติ</string>
+    <string name="tools_keybox_auto_fetch_desc">ดาวน์โหลด Keybox จาก URL ที่กำหนดเองและแทนที่ที่ติดตั้งไว้หากแตกต่างกัน</string>
+    <string name="keybox_auto_fetch_warning">เมื่อเปิดใช้ จะดาวน์โหลด keybox.xml ที่เข้ารหัส base64 ผ่าน HTTPS จาก URL ด้านล่างหลังบูตและตามช่วงเวลาที่ตั้งไว้ พร้อมแทนที่ Keybox ที่ติดตั้งไว้หากแตกต่างกัน ใช้แหล่งที่คุณเชื่อถือเท่านั้น</string>
+    <string name="keybox_auto_fetch_enabled">เปิดใช้การดึงอัตโนมัติ</string>
+    <string name="keybox_auto_fetch_enabled_desc">ปิดอยู่ตามค่าเริ่มต้น การเปลี่ยนแปลงจะบันทึกหลังแตะใช้งานเท่านั้น</string>
+    <string name="keybox_auto_fetch_url">URL ของ Keybox</string>
+    <string name="keybox_auto_fetch_url_desc">เว้นว่างเพื่อใช้แหล่งเริ่มต้น</string>
+    <string name="keybox_auto_fetch_proxy">พร็อกซีสำหรับดาวน์โหลด</string>
+    <string name="keybox_auto_fetch_proxy_desc">เทมเพลตพร็อกซี HTTPS ทางเลือก ตัวยึดตำแหน่ง %s จะถูกแทนที่ด้วย URL ของ Keybox เช่น https://gh-proxy.org/$url เว้นว่างเพื่อดาวน์โหลดโดยตรง</string>
+    <string name="keybox_auto_fetch_now">ดึงทันที</string>
+    <string name="keybox_auto_fetch_saved">บันทึกการตั้งค่าการดึงอัตโนมัติแล้ว</string>
+    <string name="keybox_auto_fetch_installed">ดาวน์โหลดและติดตั้ง Keybox จากระยะไกลแล้ว</string>
+    <string name="keybox_auto_fetch_unchanged">Keybox จากระยะไกลตรงกับที่ติดตั้งไว้แล้ว</string>
+    <string name="keybox_auto_fetch_invalid_url">URL ของ Keybox และพร็อกซีต้องเว้นว่างหรือขึ้นต้นด้วย https://</string>
+    <string name="keybox_auto_fetch_preview">แสดงตัวอย่างเท่านั้น ไม่สามารถบันทึกการตั้งค่าอุปกรณ์ที่นี่ได้</string>
+    <string name="keybox_auto_fetch_interval">ช่วงเวลาอัปเดต</string>
+    <string name="keybox_auto_fetch_interval_hours">ชั่วโมง</string>
+    <string name="keybox_auto_fetch_interval_minutes">นาที</string>
+    <string name="keybox_auto_fetch_interval_desc">การดึงข้อมูลจะทำซ้ำตามช่วงเวลานี้ ตั้งแต่ 15 นาทีถึง 7 วัน การเปลี่ยนแปลงมีผลตั้งแต่รอบถัดไป</string>
+    <string name="keybox_auto_fetch_invalid_interval">ช่วงเวลาอัปเดตต้องอยู่ระหว่าง 15 นาทีถึง 7 วัน</string>
 </resources>

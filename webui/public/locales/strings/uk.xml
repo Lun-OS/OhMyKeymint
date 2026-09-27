@@ -177,4 +177,24 @@
     <string name="soter_beta_reboot">Установіть та увімкніть Zygisk Next окремо. Після ввімкнення або вимкнення перезапустіть пристрій. Сумісність не перевірено.</string>
     <string name="soter_beta_saved">Налаштування Soter Бета збережено. Перезапустіть пристрій для застосування. Сумісність не перевірено.</string>
     <string name="soter_beta_preview">Лише попередній перегляд. Тут не можна зберегти налаштування пристрою.</string>
+    <string name="tools_keybox_auto_fetch">Автоотримання Keybox</string>
+    <string name="tools_keybox_auto_fetch_desc">Завантажує Keybox за налаштованою URL-адресою та замінює встановлений, якщо він відрізняється.</string>
+    <string name="keybox_auto_fetch_warning">Якщо увімкнено, після завантаження пристрою та далі з налаштованим інтервалом через HTTPS завантажується закодований у base64 keybox.xml з наведеної нижче URL-адреси та замінює встановлений Keybox за відмінності. Використовуйте лише джерело, якому довіряєте.</string>
+    <string name="keybox_auto_fetch_enabled">Увімкнути автоотримання</string>
+    <string name="keybox_auto_fetch_enabled_desc">Типово вимкнено. Зміни зберігаються лише після натискання «Застосувати».</string>
+    <string name="keybox_auto_fetch_url">URL-адреса Keybox</string>
+    <string name="keybox_auto_fetch_url_desc">Залиште порожнім, щоб використати типове джерело.</string>
+    <string name="keybox_auto_fetch_proxy">Проксі для завантаження</string>
+    <string name="keybox_auto_fetch_proxy_desc">Необов'язковий шаблон HTTPS-проксі. Підстановку %s замінено на URL-адресу Keybox, наприклад: https://gh-proxy.org/$url. Залиште порожнім для прямого завантаження.</string>
+    <string name="keybox_auto_fetch_now">Отримати зараз</string>
+    <string name="keybox_auto_fetch_saved">Налаштування автоотримання збережено.</string>
+    <string name="keybox_auto_fetch_installed">Віддалений Keybox завантажено та встановлено.</string>
+    <string name="keybox_auto_fetch_unchanged">Віддалений Keybox уже збігається з установленим.</string>
+    <string name="keybox_auto_fetch_invalid_url">URL-адреса Keybox і проксі мають бути порожніми або починатися з https://</string>
+    <string name="keybox_auto_fetch_preview">Лише попередній перегляд. Тут не можна зберігати налаштування пристрою.</string>
+    <string name="keybox_auto_fetch_interval">Інтервал оновлення</string>
+    <string name="keybox_auto_fetch_interval_hours">Години</string>
+    <string name="keybox_auto_fetch_interval_minutes">Хвилини</string>
+    <string name="keybox_auto_fetch_interval_desc">Отримання повторюється з цим інтервалом, від 15 хвилин до 7 днів. Зміни застосовуються з наступного циклу.</string>
+    <string name="keybox_auto_fetch_invalid_interval">Інтервал оновлення має бути від 15 хвилин до 7 днів.</string>
 </resources>

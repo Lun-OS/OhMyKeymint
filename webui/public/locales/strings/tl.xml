@@ -177,4 +177,24 @@
     <string name="soter_beta_reboot">Hiwalay na i-install at paganahin ang Zygisk Next. I-restart ang device pagkatapos itong i-on o i-off. Hindi pa nabeberipika ang pagiging tugma.</string>
     <string name="soter_beta_saved">Na-save ang setting ng Soter Beta. I-restart ang device para mailapat. Hindi pa nabeberipika ang pagiging tugma.</string>
     <string name="soter_beta_preview">Preview lamang. Hindi maaaring i-save ang mga setting ng device dito.</string>
+    <string name="tools_keybox_auto_fetch">Awtomatikong kunin ang Keybox</string>
+    <string name="tools_keybox_auto_fetch_desc">Nagda-download ng Keybox mula sa nako-configure na URL at pinapalitan ang naka-install kapag magkaiba.</string>
+    <string name="keybox_auto_fetch_warning">Kapag naka-enable, magda-download ng base64-encoded na keybox.xml sa HTTPS mula sa URL sa ibaba pagkatapos ng boot at sa itinakdang agwat, at papalitan ang naka-install na Keybox kapag magkaiba. Gumamit lang ng pinagkakatiwalaang pinagmulan.</string>
+    <string name="keybox_auto_fetch_enabled">I-enable ang awtomatikong pagkuha</string>
+    <string name="keybox_auto_fetch_enabled_desc">Naka-disable bilang default. Ang mga pagbabago ay mai-save lang pagkatapos pindutin ang Apply.</string>
+    <string name="keybox_auto_fetch_url">URL ng Keybox</string>
+    <string name="keybox_auto_fetch_url_desc">Iwanang blangko para gamitin ang default na pinagmulan.</string>
+    <string name="keybox_auto_fetch_proxy">Proxy ng pag-download</string>
+    <string name="keybox_auto_fetch_proxy_desc">Opsyonal na template ng HTTPS proxy. Pinapalitan ang %s placeholder ng URL ng Keybox, halimbawa: https://gh-proxy.org/$url. Iwanang blangko para direktang mag-download.</string>
+    <string name="keybox_auto_fetch_now">Kunin ngayon</string>
+    <string name="keybox_auto_fetch_saved">Na-save ang mga setting ng awtomatikong pagkuha.</string>
+    <string name="keybox_auto_fetch_installed">Na-download at naka-install ang remote na Keybox.</string>
+    <string name="keybox_auto_fetch_unchanged">Ang remote na Keybox ay tugma na sa naka-install.</string>
+    <string name="keybox_auto_fetch_invalid_url">Dapat blangko o nagsisimula sa https:// ang URL ng Keybox at proxy</string>
+    <string name="keybox_auto_fetch_preview">Preview lang. Hindi mai-save dito ang mga setting ng device.</string>
+    <string name="keybox_auto_fetch_interval">Agwat ng pag-update</string>
+    <string name="keybox_auto_fetch_interval_hours">Oras</string>
+    <string name="keybox_auto_fetch_interval_minutes">Minuto</string>
+    <string name="keybox_auto_fetch_interval_desc">Umuulit ang pagkuha sa agwat na ito, mula 15 minuto hanggang 7 araw. Ang mga pagbabago ay may bisa sa susunod na cycle.</string>
+    <string name="keybox_auto_fetch_invalid_interval">Dapat sa pagitan ng 15 minuto at 7 araw ang agwat ng pag-update.</string>
 </resources>

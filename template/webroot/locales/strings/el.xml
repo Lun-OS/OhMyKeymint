@@ -177,4 +177,24 @@
     <string name="soter_beta_reboot">Εγκαταστήστε και ενεργοποιήστε το Zygisk Next ξεχωριστά. Επανεκκινήστε τη συσκευή μετά την ενεργοποίηση ή απενεργοποίηση. Η συμβατότητα δεν έχει επαληθευτεί.</string>
     <string name="soter_beta_saved">Η ρύθμιση Soter Beta αποθηκεύτηκε. Επανεκκινήστε τη συσκευή για εφαρμογή. Η συμβατότητα δεν έχει επαληθευτεί.</string>
     <string name="soter_beta_preview">Μόνο προεπισκόπηση. Οι ρυθμίσεις της συσκευής δεν μπορούν να αποθηκευτούν εδώ.</string>
+    <string name="tools_keybox_auto_fetch">Αυτόματη λήψη Keybox</string>
+    <string name="tools_keybox_auto_fetch_desc">Λήψη Keybox από ρυθμιζόμενο URL και αντικατάσταση του εγκατεστημένου όταν διαφέρει.</string>
+    <string name="keybox_auto_fetch_warning">Όταν είναι ενεργό, ένα keybox.xml κωδικοποιημένο σε base64 λαμβάνεται μέσω HTTPS από το παρακάτω URL μετά την εκκίνηση και στο ρυθμισμένο διάστημα, και αντικαθιστά το εγκατεστημένο Keybox όταν διαφέρει. Χρησιμοποιήστε μόνο πηγή που εμπιστεύεστε.</string>
+    <string name="keybox_auto_fetch_enabled">Ενεργοποίηση αυτόματης λήψης</string>
+    <string name="keybox_auto_fetch_enabled_desc">Απενεργοποιημένο από προεπιλογή. Οι αλλαγές αποθηκεύονται μόνο αφού πατήσετε Εφαρμογή.</string>
+    <string name="keybox_auto_fetch_url">URL Keybox</string>
+    <string name="keybox_auto_fetch_url_desc">Αφήστε κενό για χρήση της προεπιλεγμένης πηγής.</string>
+    <string name="keybox_auto_fetch_proxy">Proxy λήψης</string>
+    <string name="keybox_auto_fetch_proxy_desc">Προαιρετικό πρότυπο HTTPS proxy. Το σύμβολο κράτησης θέσης %s αντικαθίσταται από το URL του Keybox, για παράδειγμα: https://gh-proxy.org/$url. Αφήστε κενό για απευθείας λήψη.</string>
+    <string name="keybox_auto_fetch_now">Λήψη τώρα</string>
+    <string name="keybox_auto_fetch_saved">Οι ρυθμίσεις αυτόματης λήψης αποθηκεύτηκαν.</string>
+    <string name="keybox_auto_fetch_installed">Το απομακρυσμένο Keybox λήφθηκε και εγκαταστάθηκε.</string>
+    <string name="keybox_auto_fetch_unchanged">Το απομακρυσμένο Keybox ήδη ταιριάζει με το εγκατεστημένο.</string>
+    <string name="keybox_auto_fetch_invalid_url">Το URL του Keybox και το proxy πρέπει να είναι κενά ή να ξεκινούν από https://</string>
+    <string name="keybox_auto_fetch_preview">Μόνο προεπισκόπηση. Οι ρυθμίσεις της συσκευής δεν μπορούν να αποθηκευτούν εδώ.</string>
+    <string name="keybox_auto_fetch_interval">Διάστημα ενημέρωσης</string>
+    <string name="keybox_auto_fetch_interval_hours">Ώρες</string>
+    <string name="keybox_auto_fetch_interval_minutes">Λεπτά</string>
+    <string name="keybox_auto_fetch_interval_desc">Η λήψη επαναλαμβάνεται σε αυτό το διάστημα, από 15 λεπτά έως 7 ημέρες. Οι αλλαγές ισχύουν από τον επόμενο κύκλο.</string>
+    <string name="keybox_auto_fetch_invalid_interval">Το διάστημα ενημέρωσης πρέπει να είναι από 15 λεπτά έως 7 ημέρες.</string>
 </resources>

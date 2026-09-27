@@ -177,4 +177,24 @@
     <string name="soter_beta_reboot">Pasang dan aktifkan Zygisk Next secara terpisah. Mulai ulang perangkat setelah mengaktifkan atau menonaktifkan. Kompatibilitas belum diverifikasi.</string>
     <string name="soter_beta_saved">Pengaturan Soter Beta disimpan. Mulai ulang perangkat untuk menerapkan. Kompatibilitas belum diverifikasi.</string>
     <string name="soter_beta_preview">Hanya pratinjau. Pengaturan perangkat tidak dapat disimpan di sini.</string>
+    <string name="tools_keybox_auto_fetch">Ambil Keybox otomatis</string>
+    <string name="tools_keybox_auto_fetch_desc">Mengunduh Keybox dari URL yang dapat dikonfigurasi dan mengganti yang terpasang jika berbeda.</string>
+    <string name="keybox_auto_fetch_warning">Saat diaktifkan, keybox.xml yang dikodekan base64 diunduh melalui HTTPS dari URL di bawah setelah boot dan pada interval yang dikonfigurasi, serta mengganti Keybox terpasang jika berbeda. Gunakan hanya sumber yang dipercaya.</string>
+    <string name="keybox_auto_fetch_enabled">Aktifkan pengambilan otomatis</string>
+    <string name="keybox_auto_fetch_enabled_desc">Nonaktif secara bawaan. Perubahan hanya disimpan setelah mengetuk Terapkan.</string>
+    <string name="keybox_auto_fetch_url">URL Keybox</string>
+    <string name="keybox_auto_fetch_url_desc">Biarkan kosong untuk menggunakan sumber bawaan.</string>
+    <string name="keybox_auto_fetch_proxy">Proksi unduhan</string>
+    <string name="keybox_auto_fetch_proxy_desc">Templat proksi HTTPS opsional. Placeholder %s diganti dengan URL Keybox, misalnya: https://gh-proxy.org/$url. Biarkan kosong untuk mengunduh langsung.</string>
+    <string name="keybox_auto_fetch_now">Ambil sekarang</string>
+    <string name="keybox_auto_fetch_saved">Setelan pengambilan otomatis disimpan.</string>
+    <string name="keybox_auto_fetch_installed">Keybox jarak jauh berhasil diunduh dan dipasang.</string>
+    <string name="keybox_auto_fetch_unchanged">Keybox jarak jauh sudah sama dengan yang terpasang.</string>
+    <string name="keybox_auto_fetch_invalid_url">URL Keybox dan proksi harus kosong atau diawali https://</string>
+    <string name="keybox_auto_fetch_preview">Hanya pratinjau. Setelan perangkat tidak dapat disimpan di sini.</string>
+    <string name="keybox_auto_fetch_interval">Interval pembaruan</string>
+    <string name="keybox_auto_fetch_interval_hours">Jam</string>
+    <string name="keybox_auto_fetch_interval_minutes">Menit</string>
+    <string name="keybox_auto_fetch_interval_desc">Pengambilan berulang pada interval ini, dari 15 menit hingga 7 hari. Perubahan berlaku dari siklus berikutnya.</string>
+    <string name="keybox_auto_fetch_invalid_interval">Interval pembaruan harus antara 15 menit dan 7 hari.</string>
 </resources>

@@ -177,4 +177,24 @@
     <string name="soter_beta_reboot">Zygisk Next আলাদাভাবে ইনস্টল ও চালু করুন। চালু বা বন্ধ করার পরে ডিভাইস পুনরায় চালু করুন। সামঞ্জস্য যাচাই করা হয়নি।</string>
     <string name="soter_beta_saved">Soter বেটা সেটিং সংরক্ষিত হয়েছে। প্রয়োগ করতে ডিভাইস পুনরায় চালু করুন। সামঞ্জস্য যাচাই করা হয়নি।</string>
     <string name="soter_beta_preview">শুধু প্রিভিউ। এখানে ডিভাইসের সেটিং সংরক্ষণ করা যাবে না।</string>
+    <string name="tools_keybox_auto_fetch">Keybox স্বয়ংক্রিয়ভাবে আনুন</string>
+    <string name="tools_keybox_auto_fetch_desc">কনফিগারযোগ্য URL থেকে Keybox ডাউনলোড করে এবং ভিন্ন হলে ইনস্টল করাটি প্রতিস্থাপন করে।</string>
+    <string name="keybox_auto_fetch_warning">সক্রিয় থাকলে, বুটের পরে এবং কনফিগার করা ব্যবধানে নিচের URL থেকে HTTPS-এর মাধ্যমে base64-এনকোড করা keybox.xml ডাউনলোড হয় এবং ইনস্টল করা Keybox থেকে ভিন্ন হলে তা প্রতিস্থাপন করে। শুধুমাত্র বিশ্বস্ত উৎস ব্যবহার করুন।</string>
+    <string name="keybox_auto_fetch_enabled">স্বয়ংক্রিয় আনয়ন সক্রিয় করুন</string>
+    <string name="keybox_auto_fetch_enabled_desc">ডিফল্টভাবে নিষ্ক্রিয়। প্রয়োগ স্পর্শ করার পরেই পরিবর্তনগুলি সংরক্ষিত হয়।</string>
+    <string name="keybox_auto_fetch_url">Keybox URL</string>
+    <string name="keybox_auto_fetch_url_desc">ডিফল্ট উৎস ব্যবহার করতে খালি রাখুন।</string>
+    <string name="keybox_auto_fetch_proxy">ডাউনলোড প্রক্সি</string>
+    <string name="keybox_auto_fetch_proxy_desc">ঐচ্ছিক HTTPS প্রক্সি টেমপ্লেট। %s প্লেসহোল্ডারটি Keybox URL দিয়ে প্রতিস্থাপিত হয়, যেমন: https://gh-proxy.org/$url। সরাসরি ডাউনলোড করতে খালি রাখুন।</string>
+    <string name="keybox_auto_fetch_now">এখনই আনুন</string>
+    <string name="keybox_auto_fetch_saved">স্বয়ংক্রিয় আনয়নের সেটিংস সংরক্ষিত হয়েছে।</string>
+    <string name="keybox_auto_fetch_installed">রিমোট Keybox ডাউনলোড ও ইনস্টল করা হয়েছে।</string>
+    <string name="keybox_auto_fetch_unchanged">রিমোট Keybox ইনস্টল করাটির সাথে ইতিমধ্যেই মেলে।</string>
+    <string name="keybox_auto_fetch_invalid_url">Keybox URL এবং প্রক্সি খালি বা https:// দিয়ে শুরু হতে হবে</string>
+    <string name="keybox_auto_fetch_preview">শুধুমাত্র প্রিভিউ। এখানে ডিভাইস সেটিংস সংরক্ষণ করা যাবে না।</string>
+    <string name="keybox_auto_fetch_interval">আপডেট ব্যবধান</string>
+    <string name="keybox_auto_fetch_interval_hours">ঘণ্টা</string>
+    <string name="keybox_auto_fetch_interval_minutes">মিনিট</string>
+    <string name="keybox_auto_fetch_interval_desc">এই ব্যবধানে আনয়ন পুনরাবৃত্তি হয়, ১৫ মিনিট থেকে ৭ দিন পর্যন্ত। পরিবর্তন পরবর্তী চক্র থেকে প্রযোজ্য হয়।</string>
+    <string name="keybox_auto_fetch_invalid_interval">আপডেট ব্যবধান ১৫ মিনিট থেকে ৭ দিনের মধ্যে হতে হবে।</string>
 </resources>

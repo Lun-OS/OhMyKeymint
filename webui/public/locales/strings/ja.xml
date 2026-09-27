@@ -177,4 +177,24 @@
     <string name="soter_beta_reboot">Zygisk Next を別途インストールして有効にしてください。有効化・無効化の後は端末を再起動してください。互換性は未検証です。</string>
     <string name="soter_beta_saved">Soter Beta 設定を保存しました。適用するには端末を再起動してください。互換性は未検証です。</string>
     <string name="soter_beta_preview">プレビューのみです。ここでは端末の設定を保存できません。</string>
+    <string name="tools_keybox_auto_fetch">Keybox 自動取得</string>
+    <string name="tools_keybox_auto_fetch_desc">設定した URL から Keybox をダウンロードし、インストール済みと異なる場合は自動で置き換えます。</string>
+    <string name="keybox_auto_fetch_warning">有効にすると、起動後および設定した間隔で、下記の URL から HTTPS 経由で base64 エンコードされた keybox.xml をダウンロードし、インストール済みの Keybox と異なる場合は自動で置き換えます。信頼できるソースのみを使用してください。</string>
+    <string name="keybox_auto_fetch_enabled">自動取得を有効にする</string>
+    <string name="keybox_auto_fetch_enabled_desc">デフォルトは無効です。変更は「適用」をタップした後に保存されます。</string>
+    <string name="keybox_auto_fetch_url">Keybox URL</string>
+    <string name="keybox_auto_fetch_url_desc">空欄の場合はデフォルトのソースを使用します。</string>
+    <string name="keybox_auto_fetch_proxy">ダウンロードプロキシ</string>
+    <string name="keybox_auto_fetch_proxy_desc">任意の HTTPS プロキシテンプレート。%s の部分が Keybox URL に置き換えられます（例：https://gh-proxy.org/$url）。空欄の場合は直接ダウンロードします。</string>
+    <string name="keybox_auto_fetch_now">今すぐ取得</string>
+    <string name="keybox_auto_fetch_saved">自動取得の設定を保存しました。</string>
+    <string name="keybox_auto_fetch_installed">リモートの Keybox をダウンロードしてインストールしました。</string>
+    <string name="keybox_auto_fetch_unchanged">リモートの Keybox はインストール済みと一致しています。</string>
+    <string name="keybox_auto_fetch_invalid_url">Keybox URL とプロキシは空欄、または https:// で始まる必要があります</string>
+    <string name="keybox_auto_fetch_preview">プレビューのみ。ここではデバイスの設定を保存できません。</string>
+    <string name="keybox_auto_fetch_interval">更新間隔</string>
+    <string name="keybox_auto_fetch_interval_hours">時間</string>
+    <string name="keybox_auto_fetch_interval_minutes">分</string>
+    <string name="keybox_auto_fetch_interval_desc">この間隔で取得を繰り返します（15 分～7 日）。変更は次の更新サイクルから適用されます。</string>
+    <string name="keybox_auto_fetch_invalid_interval">更新間隔は 15 分～7 日の範囲で指定してください。</string>
 </resources>

@@ -173,3 +173,55 @@ setprop persist.logd.size.main ""
 if [ -n "$RESETPROP_BIN" ] && [ -n "$("$RESETPROP_BIN" ro.kernel.qemu)" ]; then
   "$RESETPROP_BIN" ro.kernel.qemu ""
 fi
+
+# Optional remote Keybox auto-fetch configuration written by the WebUI. The
+# file contains four lines (enabled, URL, proxy, refresh interval in minutes).
+# Keep this parser strict: malformed or missing state means the feature stays
+# off and the documented default interval is used.
+KEYBOX_REMOTE_CONFIG=$TARGET_DIR/data/keybox_remote.conf
+KEYMINT_HELPER=
+for KEYMINT_CANDIDATE in "$STATE_DIR/keymint" "$MODDIR/keymint" \
+  "$MODDIR/libs/arm64-v8a/keymint" "$MODDIR/libs/x86_64/keymint"; do
+  if [ -x "$KEYMINT_CANDIDATE" ]; then
+    KEYMINT_HELPER=$KEYMINT_CANDIDATE
+    break
+  fi
+done
+
+keybox_remote_interval() {
+  INTERVAL=$(sed -n '4p' "$KEYBOX_REMOTE_CONFIG" 2>/dev/null)
+  case "$INTERVAL" in
+    ''|*[!0-9]*) INTERVAL=360 ;;
+  esac
+  if [ "$INTERVAL" -lt 15 ] || [ "$INTERVAL" -gt 10080 ]; then
+    INTERVAL=360
+  fi
+}
+
+if [ -r "$KEYBOX_REMOTE_CONFIG" ] && [ -n "$KEYMINT_HELPER" ] \
+  && [ "$(sed -n '1p' "$KEYBOX_REMOTE_CONFIG" 2>/dev/null)" = "1" ]; then
+  (
+    # Initial fetch with retries while the network comes up after boot.
+    ATTEMPT=0
+    while [ "$ATTEMPT" -lt 10 ]; do
+      KEYBOX_FETCH_RESULT=$("$KEYMINT_HELPER" --webui-fetch-remote-keybox 2>/dev/null)
+      case "$KEYBOX_FETCH_RESULT" in
+        installed|unchanged) break ;;
+      esac
+      ATTEMPT=$((ATTEMPT + 1))
+      sleep 30
+    done
+
+    # Keep the installed Keybox in sync while the device stays up. The helper
+    # validates the payload and only replaces keybox.xml when the remote copy
+    # differs. The enabled flag and interval are re-read every cycle, so
+    # disabling the feature or changing the interval takes effect without a
+    # reboot once the current sleep finishes.
+    while :; do
+      keybox_remote_interval
+      sleep $((INTERVAL * 60))
+      [ "$(sed -n '1p' "$KEYBOX_REMOTE_CONFIG" 2>/dev/null)" = "1" ] || continue
+      "$KEYMINT_HELPER" --webui-fetch-remote-keybox >/dev/null 2>&1 || true
+    done
+  ) &
+fi

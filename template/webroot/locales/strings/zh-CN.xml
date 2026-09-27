@@ -182,4 +182,24 @@
     <string name="soter_beta_reboot">请自行安装并启用 Zygisk Next。开启或关闭后均需重启设备；兼容效果尚未验证。</string>
     <string name="soter_beta_saved">Soter Beta 设置已保存，请重启设备以应用；兼容效果尚未验证。</string>
     <string name="soter_beta_preview">仅为界面预览，此处无法保存设备设置。</string>
+    <string name="tools_keybox_auto_fetch">自动获取 Keybox</string>
+    <string name="tools_keybox_auto_fetch_desc">从自定义 URL 下载 Keybox，并在与当前安装的不同时自动替换。</string>
+    <string name="keybox_auto_fetch_warning">启用后，将在每次开机后及之后按设定的间隔通过 HTTPS 从下方 URL 下载 base64 编码的 keybox.xml，并在与已安装 Keybox 不同时自动替换。请仅使用可信来源。</string>
+    <string name="keybox_auto_fetch_enabled">启用自动获取</string>
+    <string name="keybox_auto_fetch_enabled_desc">默认关闭。点击应用后才会保存更改。</string>
+    <string name="keybox_auto_fetch_url">Keybox URL</string>
+    <string name="keybox_auto_fetch_url_desc">留空使用默认来源。</string>
+    <string name="keybox_auto_fetch_proxy">下载代理</string>
+    <string name="keybox_auto_fetch_proxy_desc">可选的 HTTPS 代理模板。模板中的 %s 会被替换为 Keybox URL，例如：https://gh-proxy.org/$url。留空则直接下载。</string>
+    <string name="keybox_auto_fetch_now">立即获取</string>
+    <string name="keybox_auto_fetch_saved">自动获取设置已保存。</string>
+    <string name="keybox_auto_fetch_installed">已下载并安装远端 Keybox。</string>
+    <string name="keybox_auto_fetch_unchanged">远端 Keybox 与当前安装的一致。</string>
+    <string name="keybox_auto_fetch_invalid_url">Keybox URL 与代理必须留空或以 https:// 开头</string>
+    <string name="keybox_auto_fetch_preview">仅为界面预览，此处无法保存设备设置。</string>
+    <string name="keybox_auto_fetch_interval">更新间隔</string>
+    <string name="keybox_auto_fetch_interval_hours">小时</string>
+    <string name="keybox_auto_fetch_interval_minutes">分钟</string>
+    <string name="keybox_auto_fetch_interval_desc">按此间隔重复获取，范围为 15 分钟至 7 天。更改将从下一个刷新周期开始生效。</string>
+    <string name="keybox_auto_fetch_invalid_interval">更新间隔必须在 15 分钟至 7 天之间。</string>
 </resources>
