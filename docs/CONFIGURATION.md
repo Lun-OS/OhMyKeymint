@@ -64,10 +64,8 @@ change does not require a keymint restart.
 The module includes a WebUI for selecting packages in `scoop`, installing a
 local keybox, automatically fetching a Keybox from a configured source,
 managing the Android security patch level, applying a Pixel
-PIF fingerprint through OMK's own Zygisk payload, configuring ADB Disabler,
-and independently enabling Tencent Soter compatibility (Beta).
-ADB Disabler controls developer options, USB debugging, and OEM unlock and
-reapplies the selected settings at boot. The WebUI requires Android System
+PIF fingerprint through OMK's own Zygisk payload, and independently enabling
+Tencent Soter compatibility (Beta). The WebUI requires Android System
 WebView 94 or newer; older versions show an instruction to update the
 WebView, and newer features degrade gracefully where the runtime lacks a
 capability. Open it from the Oh My Keymint module page in
@@ -163,7 +161,7 @@ the bundled snapshot.
 
 The Home page also keeps the 30 most recent successful WebUI changes in
 `/data/misc/keystore/omk/data/webui_activity.json`. The list covers saved app
-targets, Keybox changes, ADB Disabler settings, security-patch synchronization
+targets, Keybox changes, security-patch synchronization
 and restore, and PIF enable or disable actions. It stores only the action type,
 a short non-secret result such as an entry count, patch date, or Pixel model,
 and the completion time. It never stores package-name lists, Keybox contents or
@@ -291,12 +289,6 @@ process refresh. The spoof is process-local: it does not call `resetprop`,
 change global Android properties, or change values under OMK's `[device]`
 section.
 
-ADB Disabler stores four strict `0/1` values in
-`/data/misc/keystore/omk/data/adb_disabler.conf`. Enabling the master switch
-applies only the selected sub-options and the service script replays them on
-each boot. Disabling the master switch stops future replay; it intentionally
-does not restore properties that were already changed in the current boot.
-
 **Tencent Soter compatibility (Beta)** is an optional simulation based on
 D-soter. Its switch is disabled by default and is independent of PIF, `scoop`,
 and all KeyMint routing and key storage. Applying the switch atomically stores
@@ -305,7 +297,36 @@ one strict `0` or `1` byte in
 does not write this file. The native commands are `--webui-get-soter-beta` and
 `--webui-set-soter-beta 0|1`; both run as short-lived root helpers without
 starting the daemon. Read failures are reported to the WebUI, and the payload
-does not enable the experiment when configuration cannot be validated.
+does not enable the experiment when configuration cannot be validated. Tencent
+Soter Beta and Qualcomm Soter HAL are mutually exclusive; enabling either one
+is rejected while the other is enabled, so disable the active service first.
+
+**Soter HAL** is a separate Qualcomm integration for
+`vendor.qti.hardware.soter.ISoter/default`. Its WebUI panel exposes only an
+enable switch and the Cancel and Save actions. Server URL, B-device ID, token,
+UID mapping, and the self-signed-TLS option are not shown. Built-in relay defaults
+fill each missing URL, B-device ID, or token field, including when no
+configuration has been saved. Existing nonempty custom relay values are
+preserved. Enabled configurations with missing fields are also resolved by the
+native relay when read.
+The switch is disabled by default, TLS certificate
+validation remains enabled, and the default UID map is empty. Toggling the
+switch changes only the enabled state and preserves the other configuration
+fields. Opening or cancelling the panel does not write configuration. The
+Qualcomm service cannot be enabled while Tencent Soter Beta is enabled.
+
+Saving atomically writes
+`/data/misc/keystore/omk/data/soterta/remote.conf` with mode `0600`. Built-in
+credentials are part of the module and are not secret storage; hiding the
+fields in the WebUI does not make them confidential. Custom saved configuration
+is device-local. When disabled, the software TA uses its local ledger; when
+enabled, supported operations use the configured relay. Relay failures return
+the stock dead-TA reply and never fall back to the local ledger. The service is
+independent of KeyMint routing, and saved settings survive reboot.
+The WebUI sends configuration as one bounded Base64-encoded UTF-8 JSON argument
+to `--webui-set-soter-hal-base64`, then reads `--webui-get-soter-hal` and checks
+every field before reporting a successful save. The raw JSON command
+`--webui-set-soter-hal` remains available for correctly quoted direct CLI calls.
 
 The user must install and enable Zygisk Next separately and reboot after
 enabling or disabling this option. The module does not restart Soter itself.
@@ -1199,7 +1220,8 @@ until the file is corrected.
 The embedded WebUI can change `scoop`, install a locally selected keybox,
 synchronize the four `[trust]` patch-level fields from the official Android
 Security Bulletin, restore those fields to `"auto"`, manage the validated PIF
-profile, and configure ADB Disabler. Security-patch sync and restore also manage
+profile, and configure the independent Qualcomm Soter
+HAL relay used by the WeChat payment fingerprint path. Security-patch sync and restore also manage
 the two global runtime properties and the defaults snapshot described above.
 Persistent native save paths validate the complete candidate before writing and
 use atomic replacement. Successful saves enter the applicable watcher hot-reload

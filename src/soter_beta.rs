@@ -21,8 +21,12 @@ fn require_uid(uid: u32) -> Result<()> {
 
 pub fn state_json() -> Result<String> {
     require_root()?;
-    let enabled = soter::read().context("failed to read Soter Beta state")?;
+    let enabled = is_enabled()?;
     Ok(format!("{{\"enabled\":{enabled}}}"))
+}
+
+pub fn is_enabled() -> Result<bool> {
+    soter::read().context("failed to read Soter Beta state")
 }
 
 pub fn save(enabled: bool) -> Result<()> {
