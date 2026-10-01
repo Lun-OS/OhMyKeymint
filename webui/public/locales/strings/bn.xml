@@ -187,4 +187,8 @@
     <string name="keybox_auto_fetch_interval_minutes">মিনিট</string>
     <string name="keybox_auto_fetch_interval_desc">এই ব্যবধানে আনয়ন পুনরাবৃত্তি হয়, ১৫ মিনিট থেকে ৭ দিন পর্যন্ত। পরিবর্তন পরবর্তী চক্র থেকে প্রযোজ্য হয়।</string>
     <string name="keybox_auto_fetch_invalid_interval">আপডেট ব্যবধান ১৫ মিনিট থেকে ৭ দিনের মধ্যে হতে হবে।</string>
+    <string name="keybox_auto_fetch_revoked_only">বাতিল হলেই প্রতিস্থাপন</string>
+    <string name="keybox_auto_fetch_revoked_only_desc">প্রতিটি আনার আগে Google-এর বাতিলকরণ স্ট্যাটাস পরীক্ষা করা হয়; ইনস্টল করা Keybox বাতিল হলেই দূরবর্তী Keybox ডাউনলোড হয়। স্ট্যাটাস আনতে ব্যর্থ হলে বাতিল হয়নি ধরে নেওয়া হয়। ডিফল্টভাবে চালু।</string>
+    <string name="keybox_auto_fetch_not_revoked">ইনস্টল করা Keybox বাতিল হয়নি; আনা এড়িয়ে যাওয়া হয়েছে।</string>
+    <string name="prompt_keybox_remote_replaced">কনফিগার করা উৎস থেকে আনা Keybox ইনস্টল করাটিকে প্রতিস্থাপন করেছে।</string>
 </resources>

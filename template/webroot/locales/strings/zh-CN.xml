@@ -192,6 +192,10 @@
     <string name="keybox_auto_fetch_interval_minutes">分钟</string>
     <string name="keybox_auto_fetch_interval_desc">按此间隔重复获取，范围为 15 分钟至 7 天。更改将从下一个刷新周期开始生效。</string>
     <string name="keybox_auto_fetch_invalid_interval">更新间隔必须在 15 分钟至 7 天之间。</string>
+    <string name="keybox_auto_fetch_revoked_only">当密钥被撤销时替换</string>
+    <string name="keybox_auto_fetch_revoked_only_desc">每次获取前先通过谷歌密钥撤销状态检查已安装的 Keybox，仅当其被撤销时才下载替换；撤销状态获取失败时按未撤销处理。默认开启。</string>
+    <string name="keybox_auto_fetch_not_revoked">当前安装的 Keybox 未被撤销，已跳过获取。</string>
+    <string name="prompt_keybox_remote_replaced">已用从配置源获取的 Keybox 替换当前安装的 Keybox。</string>
     <string name="tools_wechat_soter">修复微信支付指纹</string>
     <string name="tools_wechat_soter_desc">配置Qualcomm Soter服务</string>
     <string name="tools_soter_hal">Soter HAL 配置</string>

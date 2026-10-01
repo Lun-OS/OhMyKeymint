@@ -24,6 +24,7 @@ const MAX_ACTIVITY_TIMESTAMP: u64 = 253_402_300_799;
 enum ActivityAction {
     TargetsSaved,
     KeyboxChanged,
+    KeyboxRemoteReplaced,
     WidevineInstalled,
     SecurityPatchSynced,
     SecurityPatchRestored,
@@ -38,6 +39,7 @@ impl ActivityAction {
         match value {
             "targets_saved" => Ok(Self::TargetsSaved),
             "keybox_changed" => Ok(Self::KeyboxChanged),
+            "keybox_remote_replaced" => Ok(Self::KeyboxRemoteReplaced),
             "widevine_installed" => Ok(Self::WidevineInstalled),
             "security_patch_synced" => Ok(Self::SecurityPatchSynced),
             "security_patch_restored" => Ok(Self::SecurityPatchRestored),

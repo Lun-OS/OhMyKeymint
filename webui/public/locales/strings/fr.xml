@@ -187,4 +187,8 @@
     <string name="keybox_auto_fetch_interval_minutes">Minutes</string>
     <string name="keybox_auto_fetch_interval_desc">La récupération se répète à cet intervalle, de 15 minutes à 7 jours. Les changements s'appliquent à partir du prochain cycle.</string>
     <string name="keybox_auto_fetch_invalid_interval">L'intervalle de mise à jour doit être compris entre 15 minutes et 7 jours.</string>
+    <string name="keybox_auto_fetch_revoked_only">Remplacer uniquement si révoquée</string>
+    <string name="keybox_auto_fetch_revoked_only_desc">Vérifie l'état de révocation de Google avant chaque récupération ; la Keybox distante n'est téléchargée que si celle installée est révoquée. Si l'état est indisponible, la Keybox est considérée comme non révoquée. Activé par défaut.</string>
+    <string name="keybox_auto_fetch_not_revoked">La Keybox installée n'est pas révoquée ; récupération ignorée.</string>
+    <string name="prompt_keybox_remote_replaced">Une Keybox récupérée depuis la source configurée a remplacé celle installée.</string>
 </resources>

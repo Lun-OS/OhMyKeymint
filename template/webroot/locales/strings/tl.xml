@@ -187,4 +187,8 @@
     <string name="keybox_auto_fetch_interval_minutes">Minuto</string>
     <string name="keybox_auto_fetch_interval_desc">Umuulit ang pagkuha sa agwat na ito, mula 15 minuto hanggang 7 araw. Ang mga pagbabago ay may bisa sa susunod na cycle.</string>
     <string name="keybox_auto_fetch_invalid_interval">Dapat sa pagitan ng 15 minuto at 7 araw ang agwat ng pag-update.</string>
+    <string name="keybox_auto_fetch_revoked_only">Palitan lang kung na-revoke</string>
+    <string name="keybox_auto_fetch_revoked_only_desc">Tinitingnan ang Google revocation status bago bawat pagkuha; hindi-download lang ang remote Keybox kapag na-revoke ang naka-install. Kung hindi makuha ang status, itinuturing na hindi na-revoke ang Keybox. Naka-on bilang default.</string>
+    <string name="keybox_auto_fetch_not_revoked">Hindi na-revoke ang naka-install na Keybox; laktawan ang pagkuha.</string>
+    <string name="prompt_keybox_remote_replaced">Pinalitan ng Keybox mula sa naka-configure na source ang naka-install na Keybox.</string>
 </resources>

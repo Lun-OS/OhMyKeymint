@@ -187,4 +187,8 @@
     <string name="keybox_auto_fetch_interval_minutes">Minutos</string>
     <string name="keybox_auto_fetch_interval_desc">A busca se repete nesse intervalo, de 15 minutos a 7 dias. As alterações valem a partir do próximo ciclo.</string>
     <string name="keybox_auto_fetch_invalid_interval">O intervalo de atualização deve estar entre 15 minutos e 7 dias.</string>
+    <string name="keybox_auto_fetch_revoked_only">Substituir somente se revogada</string>
+    <string name="keybox_auto_fetch_revoked_only_desc">Verifica o status de revogação do Google antes de cada busca; a Keybox remota é baixada somente quando a instalada está revogada. Se o status não puder ser obtido, a Keybox é tratada como não revogada. Ativado por padrão.</string>
+    <string name="keybox_auto_fetch_not_revoked">A Keybox instalada não está revogada; busca ignorada.</string>
+    <string name="prompt_keybox_remote_replaced">Uma Keybox obtida da fonte configurada substituiu a instalada.</string>
 </resources>

@@ -35,11 +35,13 @@ const proxy = ref('')
 // v-model on a number input yields a number, so both parts stay loose.
 const intervalHours = ref<string | number>('6')
 const intervalMinutes = ref<string | number>('0')
+const revokedOnly = ref(true)
 const saved = ref<KeyboxRemoteSettings>({
   enabled: false,
   url: '',
   proxy: DEFAULT_KEYBOX_REMOTE_PROXY,
   interval_minutes: 360,
+  revoked_only: true,
 })
 const busy = ref(false)
 const fetching = ref(false)
@@ -83,7 +85,8 @@ function splitInterval(totalMinutes: number): void {
 const dirty = computed(() => enabled.value !== saved.value.enabled
   || url.value.trim() !== saved.value.url
   || proxy.value.trim() !== saved.value.proxy
-  || intervalTotalMinutes.value !== saved.value.interval_minutes)
+  || intervalTotalMinutes.value !== saved.value.interval_minutes
+  || revokedOnly.value !== saved.value.revoked_only)
 
 const valid = computed(() => isHttpsOrEmpty(url.value.trim())
   && isHttpsOrEmpty(proxy.value.trim())
@@ -109,6 +112,7 @@ async function load(): Promise<void> {
           url: '',
           proxy: DEFAULT_KEYBOX_REMOTE_PROXY,
           interval_minutes: 360,
+          revoked_only: true,
         }
       : await props.cli.getKeyboxRemoteSettings()
     if (currentGeneration !== generation || !props.modelValue) return
@@ -116,6 +120,7 @@ async function load(): Promise<void> {
     url.value = state.url
     proxy.value = state.proxy
     splitInterval(state.interval_minutes)
+    revokedOnly.value = state.revoked_only
     saved.value = state
     status.value = 'ready'
   } catch (error) {
@@ -144,12 +149,14 @@ async function save(): Promise<void> {
     url.value.trim(),
     proxy.value.trim(),
     intervalTotalMinutes.value ?? 0,
+    revokedOnly.value,
   )
   saved.value = {
     enabled: enabled.value,
     url: url.value.trim(),
     proxy: proxy.value.trim(),
     interval_minutes: intervalTotalMinutes.value ?? 0,
+    revoked_only: revokedOnly.value,
   }
 }
 
@@ -179,6 +186,8 @@ async function fetchNow(): Promise<void> {
       const result = await props.cli.fetchRemoteKeybox()
       emit('notify', result === 'installed'
         ? tr('keybox_auto_fetch_installed', 'Remote Keybox downloaded and installed.')
+        : result === 'not_revoked'
+        ? tr('keybox_auto_fetch_not_revoked', 'The installed Keybox is not revoked; fetch skipped.')
         : tr('keybox_auto_fetch_unchanged', 'The remote Keybox already matches the installed one.'))
       emit('changed')
     } else {
@@ -216,6 +225,12 @@ async function fetchNow(): Promise<void> {
             :title="tr('keybox_auto_fetch_enabled', 'Enable auto fetch')"
             :summary="tr('keybox_auto_fetch_enabled_desc', 'Disabled by default. Changes are saved only after you tap Apply.')"
             :disabled="anyBusy"
+          />
+          <MiuixSwitchPreference
+            v-model="revokedOnly"
+            :title="tr('keybox_auto_fetch_revoked_only', 'Replace only when revoked')"
+            :summary="tr('keybox_auto_fetch_revoked_only_desc', 'Check Google\'s revocation status before each fetch; the remote Keybox is downloaded only when the installed one is revoked. If the status cannot be fetched, the Keybox is treated as not revoked. Enabled by default.')"
+            :disabled="anyBusy || !enabled"
           />
         </MiuixCard>
         <label class="remote-dialog__field">

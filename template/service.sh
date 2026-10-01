@@ -136,9 +136,11 @@ if [ -n "$RESETPROP_BIN" ] && [ -n "$("$RESETPROP_BIN" ro.kernel.qemu)" ]; then
 fi
 
 # Optional remote Keybox auto-fetch configuration written by the WebUI. The
-# file contains four lines (enabled, URL, proxy, refresh interval in minutes).
+# file contains five lines (enabled, URL, proxy, refresh interval in minutes,
+# replace-only-when-revoked); the interval gating here only reads line four.
 # Keep this parser strict: malformed or missing state means the feature stays
 # off and the documented default interval is used.
+TARGET_DIR=/data/misc/keystore/omk
 KEYBOX_REMOTE_CONFIG=$TARGET_DIR/data/keybox_remote.conf
 KEYMINT_HELPER=
 for KEYMINT_CANDIDATE in "$STATE_DIR/keymint" "$MODDIR/keymint" \
@@ -167,7 +169,7 @@ if [ -r "$KEYBOX_REMOTE_CONFIG" ] && [ -n "$KEYMINT_HELPER" ] \
     while [ "$ATTEMPT" -lt 10 ]; do
       KEYBOX_FETCH_RESULT=$("$KEYMINT_HELPER" --webui-fetch-remote-keybox 2>/dev/null)
       case "$KEYBOX_FETCH_RESULT" in
-        installed|unchanged) break ;;
+        installed|unchanged|not_revoked) break ;;
       esac
       ATTEMPT=$((ATTEMPT + 1))
       sleep 30

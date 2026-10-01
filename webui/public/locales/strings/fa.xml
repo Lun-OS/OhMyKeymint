@@ -187,4 +187,8 @@
     <string name="keybox_auto_fetch_interval_minutes">دقیقه</string>
     <string name="keybox_auto_fetch_interval_desc">دریافت در این فاصله تکرار می‌شود، از ۱۵ دقیقه تا ۷ روز. تغییرات از چرخه بعدی اعمال می‌شود.</string>
     <string name="keybox_auto_fetch_invalid_interval">فاصله به‌روزرسانی باید بین ۱۵ دقیقه و ۷ روز باشد.</string>
+    <string name="keybox_auto_fetch_revoked_only">جایگزینی فقط در صورت لغو</string>
+    <string name="keybox_auto_fetch_revoked_only_desc">پیش از هر دریافت، وضعیت لغو گوگل بررسی می‌شود؛ Keybox از راه دور تنها زمانی دانلود می‌شود که Keybox نصب‌شده لغو شده باشد. اگر وضعیت دریافت نشود، Keybox لغو نشده در نظر گرفته می‌شود. به‌طور پیش‌فرض فعال است.</string>
+    <string name="keybox_auto_fetch_not_revoked">Keybox نصب‌شده لغو نشده است؛ دریافت رد شد.</string>
+    <string name="prompt_keybox_remote_replaced">Keybox دریافت‌شده از منبع پیکربندی‌شده جایگزین Keybox نصب‌شده شد.</string>
 </resources>

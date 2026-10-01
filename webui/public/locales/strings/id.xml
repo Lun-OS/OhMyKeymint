@@ -187,4 +187,8 @@
     <string name="keybox_auto_fetch_interval_minutes">Menit</string>
     <string name="keybox_auto_fetch_interval_desc">Pengambilan berulang pada interval ini, dari 15 menit hingga 7 hari. Perubahan berlaku dari siklus berikutnya.</string>
     <string name="keybox_auto_fetch_invalid_interval">Interval pembaruan harus antara 15 menit dan 7 hari.</string>
+    <string name="keybox_auto_fetch_revoked_only">Ganti hanya jika dicabut</string>
+    <string name="keybox_auto_fetch_revoked_only_desc">Memeriksa status pencabutan Google sebelum setiap pengambilan; Keybox jarak jauh hanya diunduh saat yang terpasang dicabut. Jika status tidak dapat diambil, Keybox dianggap tidak dicabut. Aktif secara bawaan.</string>
+    <string name="keybox_auto_fetch_not_revoked">Keybox terpasang tidak dicabut; pengambilan dilewati.</string>
+    <string name="prompt_keybox_remote_replaced">Keybox yang diambil dari sumber terkonfigurasi menggantikan Keybox terpasang.</string>
 </resources>

@@ -192,6 +192,10 @@
     <string name="keybox_auto_fetch_interval_minutes">Minutes</string>
     <string name="keybox_auto_fetch_interval_desc">The fetch repeats at this interval, from 15 minutes up to 7 days. Changes apply from the next refresh cycle.</string>
     <string name="keybox_auto_fetch_invalid_interval">The update interval must be between 15 minutes and 7 days.</string>
+    <string name="keybox_auto_fetch_revoked_only">Replace only when revoked</string>
+    <string name="keybox_auto_fetch_revoked_only_desc">Check Google's revocation status before each fetch; the remote Keybox is downloaded only when the installed one is revoked. If the status cannot be fetched, the Keybox is treated as not revoked. Enabled by default.</string>
+    <string name="keybox_auto_fetch_not_revoked">The installed Keybox is not revoked; fetch skipped.</string>
+    <string name="prompt_keybox_remote_replaced">A Keybox fetched from the configured source replaced the installed Keybox.</string>
     <string name="tools_wechat_soter">Fix WeChat payment fingerprint</string>
     <string name="tools_wechat_soter_desc">Configure the Qualcomm Soter service.</string>
     <string name="tools_soter_hal">Soter HAL configuration</string>

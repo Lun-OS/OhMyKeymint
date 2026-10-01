@@ -187,4 +187,8 @@
     <string name="keybox_auto_fetch_interval_minutes">分鐘</string>
     <string name="keybox_auto_fetch_interval_desc">按此間隔重複取得，範圍為 15 分鐘至 7 天。變更將從下一個重新整理週期開始生效。</string>
     <string name="keybox_auto_fetch_invalid_interval">更新間隔必須在 15 分鐘至 7 天之間。</string>
+    <string name="keybox_auto_fetch_revoked_only">僅在金鑰被撤銷時替換</string>
+    <string name="keybox_auto_fetch_revoked_only_desc">每次擷取前先透過 Google 金鑰撤銷狀態檢查已安裝的 Keybox，僅在其被撤銷時才下載替換；撤銷狀態無法取得時視為未撤銷。預設開啟。</string>
+    <string name="keybox_auto_fetch_not_revoked">目前安裝的 Keybox 未被撤銷，已略過擷取。</string>
+    <string name="prompt_keybox_remote_replaced">已使用從設定來源擷取的 Keybox 取代目前安裝的 Keybox。</string>
 </resources>

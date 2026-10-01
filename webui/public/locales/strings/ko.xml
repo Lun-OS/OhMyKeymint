@@ -187,4 +187,8 @@
     <string name="keybox_auto_fetch_interval_minutes">분</string>
     <string name="keybox_auto_fetch_interval_desc">이 간격으로 가져오기를 반복합니다(15분~7일). 변경 사항은 다음 새로고침 주기부터 적용됩니다.</string>
     <string name="keybox_auto_fetch_invalid_interval">업데이트 간격은 15분에서 7일 사이여야 합니다.</string>
+    <string name="keybox_auto_fetch_revoked_only">취소된 경우에만 교체</string>
+    <string name="keybox_auto_fetch_revoked_only_desc">가져오기 전에 Google 키 취소 상태를 확인하고, 설치된 Keybox가 취소된 경우에만 다운로드하여 교체합니다. 상태를 가져올 수 없으면 취소되지 않은 것으로 간주합니다. 기본적으로 사용됩니다.</string>
+    <string name="keybox_auto_fetch_not_revoked">설치된 Keybox가 취소되지 않아 가져오기를 건너뛰었습니다.</string>
+    <string name="prompt_keybox_remote_replaced">구성된 소스에서 가져온 Keybox로 설치된 Keybox를 교체했습니다.</string>
 </resources>

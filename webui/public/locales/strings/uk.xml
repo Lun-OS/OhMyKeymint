@@ -187,4 +187,8 @@
     <string name="keybox_auto_fetch_interval_minutes">Хвилини</string>
     <string name="keybox_auto_fetch_interval_desc">Отримання повторюється з цим інтервалом, від 15 хвилин до 7 днів. Зміни застосовуються з наступного циклу.</string>
     <string name="keybox_auto_fetch_invalid_interval">Інтервал оновлення має бути від 15 хвилин до 7 днів.</string>
+    <string name="keybox_auto_fetch_revoked_only">Замінювати лише після відкликання</string>
+    <string name="keybox_auto_fetch_revoked_only_desc">Перед кожним завантаженням перевіряється статус відкликання Google; віддалена Keybox завантажується, лише якщо встановлена відкликана. Якщо статус отримати не вдалося, Keybox вважається невідкликаною. Увімкнено за замовчуванням.</string>
+    <string name="keybox_auto_fetch_not_revoked">Встановлена Keybox не відкликана; завантаження пропущено.</string>
+    <string name="prompt_keybox_remote_replaced">Keybox, отримана з налаштованого джерела, замінила встановлену.</string>
 </resources>

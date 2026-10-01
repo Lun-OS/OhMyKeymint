@@ -187,4 +187,8 @@
     <string name="keybox_auto_fetch_interval_minutes">Minuty</string>
     <string name="keybox_auto_fetch_interval_desc">Pobieranie powtarza się w tych odstępach, od 15 minut do 7 dni. Zmiany obowiązują od następnego cyklu.</string>
     <string name="keybox_auto_fetch_invalid_interval">Interwał aktualizacji musi wynosić od 15 minut do 7 dni.</string>
+    <string name="keybox_auto_fetch_revoked_only">Zamień tylko po odwołaniu</string>
+    <string name="keybox_auto_fetch_revoked_only_desc">Przed każdym pobraniem sprawdzany jest status odwołania Google; zdalna Keybox jest pobierana tylko wtedy, gdy zainstalowana została odwołana. Jeśli status jest niedostępny, Keybox jest traktowana jako nieodwołana. Domyślnie włączone.</string>
+    <string name="keybox_auto_fetch_not_revoked">Zainstalowana Keybox nie została odwołana; pobieranie pominięto.</string>
+    <string name="prompt_keybox_remote_replaced">Keybox pobrana ze skonfigurowanego źródła zastąpiła zainstalowaną.</string>
 </resources>

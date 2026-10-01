@@ -123,6 +123,14 @@ function describeActivity(entry: ActivityEntry): { title: string, detail: string
         title: tr('menu_replace_keybox', 'Change Keybox'),
         detail: tr('prompt_keybox_replaced', 'Keybox was changed and will reload automatically.'),
       }
+    case 'keybox_remote_replaced':
+      return {
+        title: tr('tools_keybox_auto_fetch', 'Auto fetch Keybox'),
+        detail: tr(
+          'prompt_keybox_remote_replaced',
+          'A Keybox fetched from the configured source replaced the installed Keybox.',
+        ),
+      }
     case 'widevine_installed':
       return {
         // Keep historical records readable after the retired vendor action was

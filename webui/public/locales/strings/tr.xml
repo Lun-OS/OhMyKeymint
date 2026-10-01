@@ -187,4 +187,8 @@
     <string name="keybox_auto_fetch_interval_minutes">Dakika</string>
     <string name="keybox_auto_fetch_interval_desc">Alım bu aralıkla yinelenir, 15 dakikadan 7 güne kadar. Değişiklikler bir sonraki döngüden itibaren geçerlidir.</string>
     <string name="keybox_auto_fetch_invalid_interval">Güncelleme aralığı 15 dakika ile 7 gün arasında olmalıdır.</string>
+    <string name="keybox_auto_fetch_revoked_only">Yalnızca iptal edildiyse değiştir</string>
+    <string name="keybox_auto_fetch_revoked_only_desc">Her alımdan önce Google iptal durumu kontrol edilir; uzak Keybox yalnızca kurulu olan iptal edilmişse indirilir. Durum alınamazsa Keybox iptal edilmemiş sayılır. Varsayılan olarak etkin.</string>
+    <string name="keybox_auto_fetch_not_revoked">Kurulu Keybox iptal edilmemiş; alma atlandı.</string>
+    <string name="prompt_keybox_remote_replaced">Yapılandırılmış kaynaktan alınan Keybox, kurulu olanı değiştirdi.</string>
 </resources>

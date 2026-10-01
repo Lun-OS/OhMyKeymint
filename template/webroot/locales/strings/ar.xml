@@ -187,4 +187,8 @@
     <string name="keybox_auto_fetch_interval_minutes">دقائق</string>
     <string name="keybox_auto_fetch_interval_desc">يتكرر الجلب بهذه الفترة، من 15 دقيقة إلى 7 أيام. تسري التغييرات من دورة التحديث التالية.</string>
     <string name="keybox_auto_fetch_invalid_interval">يجب أن تكون فترة التحديث بين 15 دقيقة و7 أيام.</string>
+    <string name="keybox_auto_fetch_revoked_only">الاستبدال عند الإلغاء فقط</string>
+    <string name="keybox_auto_fetch_revoked_only_desc">يتحقق من حالة إلغاء Google قبل كل جلب؛ يتم تنزيل Keybox البعيدة فقط إذا كانت المثبَّتة ملغاة. إذا تعذّر جلب الحالة، تُعامل Keybox كغير ملغاة. مُمكَّن افتراضيًا.</string>
+    <string name="keybox_auto_fetch_not_revoked">Keybox المثبَّتة غير ملغاة؛ تم تخطي الجلب.</string>
+    <string name="prompt_keybox_remote_replaced">تم استبدال Keybox المثبَّتة بواحدة تم جلبها من المصدر المُهيَّأ.</string>
 </resources>

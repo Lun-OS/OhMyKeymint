@@ -187,4 +187,8 @@
     <string name="keybox_auto_fetch_interval_minutes">Dəqiqə</string>
     <string name="keybox_auto_fetch_interval_desc">Əldə etmə bu intervalda təkrarlanır, 15 dəqiqədən 7 günə qədər. Dəyişikliklər növbəti dövrdən tətbiq olunur.</string>
     <string name="keybox_auto_fetch_invalid_interval">Yeniləmə intervalı 15 dəqiqə ilə 7 gün arasında olmalıdır.</string>
+    <string name="keybox_auto_fetch_revoked_only">Yalnız ləğv edildikdə əvəz et</string>
+    <string name="keybox_auto_fetch_revoked_only_desc">Hər yükləmədən əvvəl Google ləğv statusu yoxlanır; uzaqdan Keybox yalnız quraşdırılmış ləğv edilibsə yüklənir. Status əldə edilə bəlməzsə, Keybox ləğv edilməmiş sayılır. Standart olaraq aktivdir.</string>
+    <string name="keybox_auto_fetch_not_revoked">Quraşdırılmış Keybox ləğv edilməyib; yükləmə ötürülüb.</string>
+    <string name="prompt_keybox_remote_replaced">Konfiqurasiya edilmiş mənbədən alınan Keybox quraşdırılmışını əvəz etdi.</string>
 </resources>

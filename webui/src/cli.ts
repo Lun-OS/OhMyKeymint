@@ -29,6 +29,7 @@ const PIF_PRODUCT_RE = /^[a-z0-9][a-z0-9_]*$/
 const ACTIVITY_ACTIONS = [
   'targets_saved',
   'keybox_changed',
+  'keybox_remote_replaced',
   'widevine_installed',
   'security_patch_synced',
   'security_patch_restored',
@@ -106,6 +107,8 @@ export interface KeyboxRemoteSettings {
   proxy: string
   /** Periodic refresh interval in minutes (15..10080). */
   interval_minutes: number
+  /** Replace the installed Keybox only when Google reports it revoked. */
+  revoked_only: boolean
 }
 
 /** Mirrors src/keybox_remote.rs. */
@@ -113,7 +116,7 @@ export const MIN_KEYBOX_REMOTE_INTERVAL_MINUTES = 15
 /** Mirrors src/keybox_remote.rs. */
 export const MAX_KEYBOX_REMOTE_INTERVAL_MINUTES = 7 * 24 * 60
 
-export type KeyboxRemoteFetchResult = 'installed' | 'unchanged'
+export type KeyboxRemoteFetchResult = 'installed' | 'unchanged' | 'not_revoked'
 
 function parseCanonicalJson(output: string, description: string): unknown {
   let parsed: unknown
@@ -345,7 +348,7 @@ export class Cli {
     const output = await this.#run(keymint, ['--webui-get-keybox-remote-settings'], 8192)
     const parsed = parseCanonicalJson(output, 'Keybox auto fetch settings')
     if (!isRecord(parsed)
-        || !hasOnlyKeys(parsed, ['enabled', 'url', 'proxy', 'interval_minutes'])
+        || !hasOnlyKeys(parsed, ['enabled', 'url', 'proxy', 'interval_minutes', 'revoked_only'])
         || typeof parsed.enabled !== 'boolean'
         || typeof parsed.url !== 'string'
         || typeof parsed.proxy !== 'string'
@@ -356,7 +359,8 @@ export class Cli {
         || parsed.url.length > MAX_REMOTE_SETTING_LENGTH
         || parsed.proxy.length > MAX_REMOTE_SETTING_LENGTH
         || /[\u0000-\u001f\u007f]/.test(parsed.url)
-        || /[\u0000-\u001f\u007f]/.test(parsed.proxy)) {
+        || /[\u0000-\u001f\u007f]/.test(parsed.proxy)
+        || typeof parsed.revoked_only !== 'boolean') {
       throw new Error('OMK returned invalid Keybox auto fetch settings')
     }
     return {
@@ -364,6 +368,7 @@ export class Cli {
       url: parsed.url,
       proxy: parsed.proxy,
       interval_minutes: parsed.interval_minutes,
+      revoked_only: parsed.revoked_only,
     }
   }
 
@@ -372,6 +377,7 @@ export class Cli {
     url: string,
     proxy: string,
     intervalMinutes: number,
+    revokedOnly: boolean,
   ): Promise<void> {
     if (url.length > MAX_REMOTE_SETTING_LENGTH || proxy.length > MAX_REMOTE_SETTING_LENGTH) {
       throw new Error('Keybox auto fetch settings exceed the length limit')
@@ -384,6 +390,7 @@ export class Cli {
       url: url.trim(),
       proxy: proxy.trim(),
       interval_minutes: intervalMinutes,
+      revoked_only: revokedOnly,
     }))
     const { keymint } = await this.#getHelperPaths()
     const output = await this.#run(keymint, ['--webui-set-keybox-remote-settings', payload], 256)
@@ -395,7 +402,7 @@ export class Cli {
   async fetchRemoteKeybox(): Promise<KeyboxRemoteFetchResult> {
     const { keymint } = await this.#getHelperPaths()
     const output = await this.#run(keymint, ['--webui-fetch-remote-keybox'], 256)
-    if (output !== 'installed' && output !== 'unchanged') {
+    if (output !== 'installed' && output !== 'unchanged' && output !== 'not_revoked') {
       throw new Error('OMK returned an unexpected remote Keybox result')
     }
     return output

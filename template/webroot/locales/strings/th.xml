@@ -187,4 +187,8 @@
     <string name="keybox_auto_fetch_interval_minutes">นาที</string>
     <string name="keybox_auto_fetch_interval_desc">การดึงข้อมูลจะทำซ้ำตามช่วงเวลานี้ ตั้งแต่ 15 นาทีถึง 7 วัน การเปลี่ยนแปลงมีผลตั้งแต่รอบถัดไป</string>
     <string name="keybox_auto_fetch_invalid_interval">ช่วงเวลาอัปเดตต้องอยู่ระหว่าง 15 นาทีถึง 7 วัน</string>
+    <string name="keybox_auto_fetch_revoked_only">แทนที่เฉพาะเมื่อถูกเพิกถอน</string>
+    <string name="keybox_auto_fetch_revoked_only_desc">ตรวจสอบสถานะการเพิกถอนของ Google ก่อนดึงข้อมูลแต่ละครั้ง; จะดาวน์โหลด Keybox จากระยะไกลเฉพาะเมื่อ Keybox ที่ติดตั้งถูกเพิกถอนเท่านั้น หากดึงสถานะไม่สำเร็จ จะถือว่าไม่ถูกเพิกถอน เปิดใช้ตามค่าเริ่มต้น</string>
+    <string name="keybox_auto_fetch_not_revoked">Keybox ที่ติดตั้งไม่ถูกเพิกถอน; ข้ามการดึงข้อมูล</string>
+    <string name="prompt_keybox_remote_replaced">Keybox ที่ดึงมาจากแหล่งที่ตั้งค่าไว้ได้แทนที่ Keybox ที่ติดตั้งอยู่</string>
 </resources>

@@ -187,4 +187,8 @@
     <string name="keybox_auto_fetch_interval_minutes">分</string>
     <string name="keybox_auto_fetch_interval_desc">この間隔で取得を繰り返します（15 分～7 日）。変更は次の更新サイクルから適用されます。</string>
     <string name="keybox_auto_fetch_invalid_interval">更新間隔は 15 分～7 日の範囲で指定してください。</string>
+    <string name="keybox_auto_fetch_revoked_only">失効時のみ置き換え</string>
+    <string name="keybox_auto_fetch_revoked_only_desc">取得前に Google の失効状態を確認し、インストール済みの Keybox が失効している場合のみダウンロードして置き換えます。状態を取得できない場合は失効していないものとして扱います。デフォルトで有効。</string>
+    <string name="keybox_auto_fetch_not_revoked">インストール済みの Keybox は失効していないため、取得をスキップしました。</string>
+    <string name="prompt_keybox_remote_replaced">設定したソースから取得した Keybox でインストール済みの Keybox を置き換えました。</string>
 </resources>

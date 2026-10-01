@@ -187,4 +187,8 @@
     <string name="keybox_auto_fetch_interval_minutes">Phút</string>
     <string name="keybox_auto_fetch_interval_desc">Việc tải lặp lại theo khoảng thời gian này, từ 15 phút đến 7 ngày. Thay đổi có hiệu lực từ chu kỳ làm mới tiếp theo.</string>
     <string name="keybox_auto_fetch_invalid_interval">Khoảng thời gian cập nhật phải từ 15 phút đến 7 ngày.</string>
+    <string name="keybox_auto_fetch_revoked_only">Chỉ thay thế khi bị thu hồi</string>
+    <string name="keybox_auto_fetch_revoked_only_desc">Kiểm tra trạng thái thu hồi của Google trước mỗi lần tải; Keybox từ xa chỉ được tải xuống khi Keybox đã cài đặt bị thu hồi. Nếu không lấy được trạng thái, Keybox được coi là chưa thu hồi. Bật theo mặc định.</string>
+    <string name="keybox_auto_fetch_not_revoked">Keybox đã cài đặt không bị thu hồi; đã bỏ qua việc tải.</string>
+    <string name="prompt_keybox_remote_replaced">Keybox lấy từ nguồn đã cấu hình đã thay thế Keybox đang cài đặt.</string>
 </resources>

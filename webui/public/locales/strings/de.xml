@@ -187,4 +187,8 @@
     <string name="keybox_auto_fetch_interval_minutes">Minuten</string>
     <string name="keybox_auto_fetch_interval_desc">Der Abruf wiederholt sich in diesem Abstand, von 15 Minuten bis zu 7 Tagen. Änderungen greifen ab dem nächsten Aktualisierungszyklus.</string>
     <string name="keybox_auto_fetch_invalid_interval">Das Aktualisierungsintervall muss zwischen 15 Minuten und 7 Tagen liegen.</string>
+    <string name="keybox_auto_fetch_revoked_only">Nur bei Widerruf ersetzen</string>
+    <string name="keybox_auto_fetch_revoked_only_desc">Prüft vor jedem Abruf den Widerrufsstatus von Google; die entfernte Keybox wird nur heruntergeladen, wenn die installierte widerrufen wurde. Ist der Status nicht abrufbar, gilt die Keybox als nicht widerrufen. Standardmäßig aktiv.</string>
+    <string name="keybox_auto_fetch_not_revoked">Die installierte Keybox ist nicht widerrufen; Abruf übersprungen.</string>
+    <string name="prompt_keybox_remote_replaced">Eine von der konfigurierten Quelle geladene Keybox hat die installierte ersetzt.</string>
 </resources>

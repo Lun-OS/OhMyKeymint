@@ -187,21 +187,34 @@ configured, and a proxy template rewrites the request: `$url` inside the
 template is replaced by the source URL, and a template without the placeholder
 is used as a prefix. The proxy is preset to `https://gh-proxy.org/$url`, which
 fetches the default source through the gh-proxy mirror; clearing the field
-fetches directly and any other template is used as configured. The first fetch
+fetches directly and any other template is used as configured.
+**Replace only when revoked** is enabled by default. Before every fetch it
+checks the installed Keybox against Google's revocation status with the same
+built-in lookup the WebUI revocation check uses, and the remote Keybox is
+downloaded only when the installed Keybox is reported as revoked. If the
+revocation status cannot be established — including an absent, invalid, or
+unreadable installed Keybox and an unreachable status source — the installed
+Keybox is treated as not revoked and the fetch is skipped. With the switch
+disabled, every run fetches the remote source unconditionally.
+The first fetch
 runs after boot with retries while the network comes up, and the configured
 source is re-checked at the configured update interval; both runs are skipped
 while the feature is disabled. The interval is entered as hours and minutes,
 from 15 minutes up to 7 days, with six hours as the default; a changed
 interval applies from the next refresh cycle. **Fetch now** performs the same
-download and comparison on demand.
+revocation check and download on demand and reports when the fetch was
+skipped because the installed Keybox is not revoked.
 The source URL and proxy must be empty or use `https` and must not embed
 credentials. Downloads use the module's native HTTPS client with embedded
 WebPKI roots and are limited in size and time; the decoded payload is validated
 exactly like a local import before it replaces the file, so a failed or
-invalid fetch leaves the active keybox unchanged. The switch, URL, proxy, and
-interval persist in `/data/misc/keystore/omk/data/keybox_remote.conf` (four
-lines: enabled, URL, proxy, interval minutes), and a successful
-replacement is recorded in the activity log.
+invalid fetch leaves the active keybox unchanged. The switch, URL, proxy,
+interval, and revocation switch persist in
+`/data/misc/keystore/omk/data/keybox_remote.conf` (five lines: enabled, URL,
+proxy, interval minutes, replace-only-when-revoked; legacy three- and
+four-line files keep the documented defaults for the missing fields), and a
+replacement performed by auto fetch is recorded in the activity log as its
+own entry.
 Its **Sync security
 patch** action uses the root WebUI bridge to make an HTTPS request to the
 official `https://source.android.com/docs/security/bulletin/asb-overview` page,

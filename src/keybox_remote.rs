@@ -38,6 +38,7 @@ pub const DEFAULT_INTERVAL_MINUTES: u32 = 6 * 60;
 
 const FETCH_RESULT_INSTALLED: &str = "installed";
 const FETCH_RESULT_UNCHANGED: &str = "unchanged";
+const FETCH_RESULT_NOT_REVOKED: &str = "not_revoked";
 
 #[derive(Clone, Debug, PartialEq, Eq, serde::Serialize)]
 pub struct Settings {
@@ -49,6 +50,9 @@ pub struct Settings {
     pub proxy: String,
     /// Periodic refresh interval in minutes.
     pub interval_minutes: u32,
+    /// Replace only when Google's revocation status reports the installed
+    /// Keybox as revoked. Enabled by default.
+    pub revoked_only: bool,
 }
 
 impl Default for Settings {
@@ -60,6 +64,7 @@ impl Default for Settings {
             url: String::new(),
             proxy: DEFAULT_KEYBOX_REMOTE_PROXY.to_string(),
             interval_minutes: DEFAULT_INTERVAL_MINUTES,
+            revoked_only: true,
         }
     }
 }
@@ -78,6 +83,8 @@ struct SettingsPayload {
     proxy: String,
     #[serde(default = "default_interval_minutes")]
     interval_minutes: u32,
+    #[serde(default = "default_revoked_only")]
+    revoked_only: bool,
 }
 
 fn default_proxy() -> String {
@@ -86,6 +93,10 @@ fn default_proxy() -> String {
 
 fn default_interval_minutes() -> u32 {
     DEFAULT_INTERVAL_MINUTES
+}
+
+fn default_revoked_only() -> bool {
+    true
 }
 
 impl SettingsPayload {
@@ -108,6 +119,7 @@ impl SettingsPayload {
             url,
             proxy,
             interval_minutes: self.interval_minutes,
+            revoked_only: self.revoked_only,
         })
     }
 }
@@ -121,24 +133,28 @@ impl Settings {
     }
 
     /// Parses the settings file. Legacy three-line files (without the
-    /// interval) keep the default interval.
+    /// interval) and four-line files (without the revocation switch) keep
+    /// the documented defaults for the missing trailing fields.
     fn parse(contents: &str) -> Result<Self> {
         let lines: Vec<&str> = contents.lines().collect();
         let tokens = match lines.len() {
-            3 => {
+            3 | 4 => {
                 let mut tokens = lines
                     .iter()
                     .map(|line| (*line).to_string())
                     .collect::<Vec<_>>();
-                tokens.push(DEFAULT_INTERVAL_MINUTES.to_string());
+                if lines.len() == 3 {
+                    tokens.push(DEFAULT_INTERVAL_MINUTES.to_string());
+                }
+                tokens.push(u8::from(default_revoked_only()).to_string());
                 tokens
             }
-            4 => lines
+            5 => lines
                 .iter()
                 .map(|line| (*line).to_string())
                 .collect::<Vec<_>>(),
             count => {
-                bail!("Keybox auto fetch settings must contain three or four lines, found {count}")
+                bail!("Keybox auto fetch settings must contain three to five lines, found {count}")
             }
         };
         Self::from_file_tokens(&tokens)
@@ -167,21 +183,28 @@ impl Settings {
                 "update interval must be between {MIN_INTERVAL_MINUTES} and {MAX_INTERVAL_MINUTES} minutes"
             );
         }
+        let revoked_only = match tokens[4].as_str() {
+            "0" => false,
+            "1" => true,
+            _ => bail!("Keybox auto fetch revoked-only must be 0 or 1"),
+        };
         Ok(Self {
             enabled,
             url,
             proxy,
             interval_minutes,
+            revoked_only,
         })
     }
 
     fn canonical_bytes(&self) -> Vec<u8> {
         format!(
-            "{}\n{}\n{}\n{}\n",
+            "{}\n{}\n{}\n{}\n{}\n",
             u8::from(self.enabled),
             self.url,
             self.proxy,
-            self.interval_minutes
+            self.interval_minutes,
+            u8::from(self.revoked_only)
         )
         .into_bytes()
     }
@@ -305,10 +328,45 @@ fn fetch_effective_url(url: &str) -> Result<String> {
     webui_http::download_https_utf8(uri, &policy, is_allowed_remote_keybox_uri)
 }
 
+/// Reports whether Google's attestation status marks the installed Keybox as
+/// revoked, using the same status lookup as the WebUI revocation check. Any
+/// failure to establish a revocation verdict — a missing or invalid keybox,
+/// unreadable certificate serials, or an unreachable status source — counts as
+/// "not revoked" so a broken check never silently triggers a replacement.
+fn installed_keybox_is_revoked() -> bool {
+    let verdict = || -> Result<bool> {
+        let (state, _, serials) = keybox::installed_keybox_state_and_metadata()?;
+        if matches!(state, keybox::KeyboxFileState::Invalid) {
+            return Ok(false);
+        }
+        let serials = serials.ok_or_else(|| {
+            anyhow::anyhow!("installed Keybox certificate serial numbers are unreadable")
+        })?;
+        Ok(matches!(
+            keybox::check_google_attestation_status(&serials)?,
+            keybox::KeyboxRevocationStatus::Revoked
+        ))
+    };
+    match verdict() {
+        Ok(revoked) => revoked,
+        Err(error) => {
+            log::warn!(
+                "Keybox revocation check failed; treating the installed Keybox as not revoked: {error:#}"
+            );
+            false
+        }
+    }
+}
+
 /// Downloads the remote Keybox, decodes it, and replaces the installed
-/// `keybox.xml` when it differs. Returns `installed` or `unchanged`.
+/// `keybox.xml` when it differs. Returns `installed`, `unchanged`, or
+/// `not_revoked` when the revocation switch skipped the download.
 pub fn fetch_and_install() -> Result<&'static str> {
     let settings = Settings::read_from(Path::new(SETTINGS_PATH));
+    if settings.revoked_only && !installed_keybox_is_revoked() {
+        log::info!("installed Keybox is not revoked; skipping the remote Keybox fetch");
+        return Ok(FETCH_RESULT_NOT_REVOKED);
+    }
     let url = effective_url(&settings);
     let payload = fetch_effective_url(&url)?;
     let xml = decode_keybox_payload(&payload)?;
@@ -323,8 +381,8 @@ pub fn fetch_and_install() -> Result<&'static str> {
     // Revalidates the payload before the atomic replace; the daemon observes
     // the new file through the existing keybox watcher.
     keybox::install_keybox_xml(xml.as_bytes())?;
-    if let Err(error) = webui_activity::record("keybox_changed", "remote") {
-        log::warn!("failed to record the remote Keybox change: {error:#}");
+    if let Err(error) = webui_activity::record("keybox_remote_replaced", "remote") {
+        log::warn!("failed to record the remote Keybox replacement: {error:#}");
     }
     log::info!("installed the Keybox fetched from the remote source");
     Ok(FETCH_RESULT_INSTALLED)
@@ -356,6 +414,7 @@ mod tests {
             url: url.to_string(),
             proxy: proxy.to_string(),
             interval_minutes: DEFAULT_INTERVAL_MINUTES,
+            revoked_only: true,
         }
     }
 
@@ -365,6 +424,7 @@ mod tests {
             "url": url,
             "proxy": proxy,
             "interval_minutes": interval,
+            "revoked_only": true,
         })
         .to_string()
         .into_bytes()
@@ -376,6 +436,7 @@ mod tests {
         let path = temp_dir.path().join("keybox_remote.conf");
         let value = Settings {
             interval_minutes: 90,
+            revoked_only: false,
             ..settings(
                 true,
                 "https://example.com/key",
@@ -385,7 +446,7 @@ mod tests {
         value.persist_to(&path).unwrap();
         assert_eq!(
             fs::read_to_string(&path).unwrap(),
-            "1\nhttps://example.com/key\nhttps://mirror.example/$url\n90\n"
+            "1\nhttps://example.com/key\nhttps://mirror.example/$url\n90\n0\n"
         );
         assert_eq!(Settings::read_from(&path), value);
     }
@@ -402,6 +463,21 @@ mod tests {
         let parsed = Settings::read_from(&path);
         assert_eq!(parsed.interval_minutes, DEFAULT_INTERVAL_MINUTES);
         assert_eq!(parsed.url, "https://example.com/key");
+        assert!(parsed.revoked_only);
+    }
+
+    #[test]
+    fn legacy_four_line_file_defaults_to_revoked_only() {
+        let temp_dir = tempfile::tempdir().unwrap();
+        let path = temp_dir.path().join("keybox_remote.conf");
+        fs::write(
+            &path,
+            "1\nhttps://example.com/key\nhttps://mirror.example/$url\n90\n",
+        )
+        .unwrap();
+        let parsed = Settings::read_from(&path);
+        assert_eq!(parsed.interval_minutes, 90);
+        assert!(parsed.revoked_only);
     }
 
     #[test]
@@ -425,6 +501,7 @@ mod tests {
             "1\na\nb\nextra\n99999\n",
             "1\na\nb\nfive\n",
             "1\na\nb\n14\n",
+            "1\na\nb\n90\nyes\n",
         ] {
             let path = temp_dir.path().join("damaged.conf");
             fs::write(&path, damaged).unwrap();
@@ -477,6 +554,13 @@ mod tests {
                 ..Settings::default()
             }
         );
+        // The revocation switch persists in both directions and defaults to
+        // enabled when a stale WebUI omits it.
+        let explicit = Settings::from_json_payload(
+            br#"{"enabled":true,"url":"","proxy":"","interval_minutes":360,"revoked_only":false}"#,
+        )
+        .unwrap();
+        assert!(!explicit.revoked_only);
     }
 
     #[test]

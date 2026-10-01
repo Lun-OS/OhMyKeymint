@@ -187,4 +187,8 @@
     <string name="keybox_auto_fetch_interval_minutes">Λεπτά</string>
     <string name="keybox_auto_fetch_interval_desc">Η λήψη επαναλαμβάνεται σε αυτό το διάστημα, από 15 λεπτά έως 7 ημέρες. Οι αλλαγές ισχύουν από τον επόμενο κύκλο.</string>
     <string name="keybox_auto_fetch_invalid_interval">Το διάστημα ενημέρωσης πρέπει να είναι από 15 λεπτά έως 7 ημέρες.</string>
+    <string name="keybox_auto_fetch_revoked_only">Αντικατάσταση μόνο αν ανακληθεί</string>
+    <string name="keybox_auto_fetch_revoked_only_desc">Ελέγχει την κατάσταση ανάκλησης της Google πριν από κάθε λήψη· η απομακρυσμένη Keybox κατεβαίνει μόνο όταν η εγκατεστημένη έχει ανακληθεί. Αν η κατάσταση δεν είναι διαθέσιμη, η Keybox θεωρείται μη ανακλημένη. Ενεργό από προεπιλογή.</string>
+    <string name="keybox_auto_fetch_not_revoked">Η εγκατεστημένη Keybox δεν έχει ανακληθεί· η λήψη παραλείφθηκε.</string>
+    <string name="prompt_keybox_remote_replaced">Μια Keybox από την ρυθμισμένη πηγή αντικατέστησε την εγκατεστημένη.</string>
 </resources>
