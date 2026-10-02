@@ -340,10 +340,10 @@ async function refreshIdentity(force = false): Promise<void> {
       keyboxStatus.value = value.valid ? (value.bundled ? 'bundled' : 'custom') : 'invalid'
       keyboxSource.value = value.source
       keyboxLevel.value = value.level
-      keyboxRevocation.value = value.valid ? 'checking' : value.revocation
-      // The online status lookup is a separate slow command; run it in its
-      // own lane so the remaining identity fields land without waiting.
-      if (value.valid) void refreshKeyboxRevocation()
+      // The online status lookup is a slow network command and stays
+      // user-triggered; auto-running it at startup would stall every other
+      // helper command the WebUI issues while it is in flight.
+      keyboxRevocation.value = value.valid ? 'not_checked' : value.revocation
     } else keyboxStatus.value = 'error'
     if (patch.status === 'fulfilled') securityPatch.value = patch.value
     if (tee.status === 'fulfilled') teeStatus.value = 'normal'
@@ -359,14 +359,27 @@ async function refreshIdentity(force = false): Promise<void> {
 }
 
 let revocationCheckGeneration = 0
+const keyboxRevocationBusy = ref(false)
+// The helper command downloads Google's status list and can hang on a
+// broken network; stop waiting after this long so the status row can be
+// retried instead of spinning forever.
+const REVOCATION_CHECK_TIMEOUT_MS = 20000
 
 async function refreshKeyboxRevocation(): Promise<void> {
+  if (keyboxRevocationBusy.value) return
+  keyboxRevocationBusy.value = true
   const generation = ++revocationCheckGeneration
   try {
-    const status = await cli.checkKeyboxRevocation()
+    const status = await new Promise<KeyboxRevocationStatus>(resolve => {
+      const timer = window.setTimeout(() => resolve('unknown'), REVOCATION_CHECK_TIMEOUT_MS)
+      cli.checkKeyboxRevocation().then(
+        value => { window.clearTimeout(timer); resolve(value) },
+        () => { window.clearTimeout(timer); resolve('unknown') },
+      )
+    })
     if (generation === revocationCheckGeneration) keyboxRevocation.value = status
-  } catch {
-    if (generation === revocationCheckGeneration) keyboxRevocation.value = 'unknown'
+  } finally {
+    if (generation === revocationCheckGeneration) keyboxRevocationBusy.value = false
   }
 }
 
@@ -616,12 +629,14 @@ watch(keyboxOpen, open => {
           :keybox-source="keyboxSource"
           :keybox-level="keyboxLevel"
           :keybox-revocation="keyboxRevocation"
+          :keybox-revocation-busy="keyboxRevocationBusy"
           :tee-status="teeStatus"
           :security-patch="securityPatch"
           :spoofed-device="spoofedDevice"
           :activities="activities"
           :activity-status="activityStatus"
           :activity-clear-busy="activityClearBusy"
+          @check-revocation="void refreshKeyboxRevocation()"
           @clear-activities="clearActivities"
         />
       </Transition>

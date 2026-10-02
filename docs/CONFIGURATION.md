@@ -143,7 +143,10 @@ a Google Play services process.
 
 The Keybox card checks every certificate serial number from both presented
 algorithm chains against Google's attestation status list at
-`https://android.googleapis.com/attestation/status`. A validated local cache
+`https://android.googleapis.com/attestation/status`. This online lookup runs
+only when it is requested through the refresh control on the **Certificate
+status** row; the card reports **Not checked** until then and never starts a
+network lookup on its own while the page loads. A validated local cache
 is used for up to 12 hours after its last successful refresh; the next status
 check after that interval performs an online lookup. A successful online
 lookup is atomically cached at
@@ -157,7 +160,9 @@ certificate-parsing, or response-parsing failure is never treated as
 snapshot contain public Google data and can become stale, so **Not revoked**
 does not prove that Play Integrity will accept the Keybox. When a refresh is
 due, an unavailable endpoint falls back to the last validated cache and then
-the bundled snapshot.
+the bundled snapshot. A check that exceeds the WebUI's wait limit is shown as
+a failed check and can be retried; the underlying lookup keeps the cache
+warm for the next attempt.
 
 The Home page also keeps the 30 most recent successful WebUI changes in
 `/data/misc/keystore/omk/data/webui_activity.json`. The list covers saved app

@@ -80,6 +80,7 @@
     <string name="home_keybox_revocation_not_revoked">未撤销</string>
     <string name="home_keybox_revocation_revoked">已撤销</string>
     <string name="home_keybox_revocation_check_failed">检查失败</string>
+    <string name="home_keybox_revocation_check">检查证书状态</string>
     <string name="home_keybox_local_invalid">本地验证失败</string>
     <string name="home_keybox_status_unknown">未知</string>
     <string name="home_keybox_status_checking">检测中</string>

@@ -9,7 +9,7 @@ import {
   MiuixProgressIndicator,
   MiuixTopAppBar,
 } from 'miuix-vue'
-import { Copy, Delete, Info, Ok, Recent } from 'miuix-vue/icons'
+import { Copy, Delete, Info, Ok, Recent, Refresh } from 'miuix-vue/icons'
 import type {
   ActivityEntry,
   KeyboxLevel,
@@ -28,6 +28,7 @@ const props = defineProps<{
   keyboxSource: KeyboxSource
   keyboxLevel: KeyboxLevel
   keyboxRevocation: KeyboxRevocationStatus
+  keyboxRevocationBusy: boolean
   teeStatus: TeeStatus
   securityPatch: string | null
   spoofedDevice: string | null | undefined
@@ -37,6 +38,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
+  checkRevocation: []
   clearActivities: []
 }>()
 
@@ -247,9 +249,25 @@ async function copyActivity(entry: ActivityEntry): Promise<void> {
           <span>{{ tr('home_keybox_security_level', 'Security Level') }}</span>
           <strong>{{ keyboxLevelLabel }}</strong>
         </div>
-        <div class="identity-field">
+        <div class="identity-field identity-field--action">
           <span>{{ tr('home_keybox_revocation', 'Certificate status') }}</span>
           <strong :data-tone="revocationState.tone">{{ revocationState.label }}</strong>
+          <button
+            class="identity-field-button"
+            type="button"
+            :disabled="props.keyboxRevocationBusy || props.keyboxStatus === 'loading'"
+            :aria-label="tr('home_keybox_revocation_check', 'Check certificate status')"
+            :title="tr('home_keybox_revocation_check', 'Check certificate status')"
+            @click="emit('checkRevocation')"
+          >
+            <MiuixProgressIndicator
+              v-if="props.keyboxRevocationBusy"
+              type="circular"
+              :size="18"
+              :stroke-width="2.5"
+            />
+            <MiuixIcon v-else :icon="Refresh" :size="18" />
+          </button>
         </div>
       </MiuixCard>
 

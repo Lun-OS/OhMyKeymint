@@ -80,6 +80,7 @@
     <string name="home_keybox_revocation_not_revoked">Not revoked</string>
     <string name="home_keybox_revocation_revoked">Revoked</string>
     <string name="home_keybox_revocation_check_failed">Check failed</string>
+    <string name="home_keybox_revocation_check">Check certificate status</string>
     <string name="home_keybox_local_invalid">Local validation failed</string>
     <string name="home_keybox_status_unknown">Unknown</string>
     <string name="home_keybox_status_checking">Checking</string>
