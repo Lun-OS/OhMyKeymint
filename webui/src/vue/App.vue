@@ -341,10 +341,9 @@ async function refreshIdentity(force = false): Promise<void> {
       keyboxSource.value = value.source
       keyboxLevel.value = value.level
       keyboxRevocation.value = value.valid ? 'checking' : value.revocation
-      if (value.valid) {
-        try { keyboxRevocation.value = await cli.checkKeyboxRevocation() }
-        catch { keyboxRevocation.value = 'unknown' }
-      }
+      // The online status lookup is a separate slow command; run it in its
+      // own lane so the remaining identity fields land without waiting.
+      if (value.valid) void refreshKeyboxRevocation()
     } else keyboxStatus.value = 'error'
     if (patch.status === 'fulfilled') securityPatch.value = patch.value
     if (tee.status === 'fulfilled') teeStatus.value = 'normal'
@@ -356,6 +355,18 @@ async function refreshIdentity(force = false): Promise<void> {
     }
   } catch (error) {
     console.error('Unable to load OMK identity:', error)
+  }
+}
+
+let revocationCheckGeneration = 0
+
+async function refreshKeyboxRevocation(): Promise<void> {
+  const generation = ++revocationCheckGeneration
+  try {
+    const status = await cli.checkKeyboxRevocation()
+    if (generation === revocationCheckGeneration) keyboxRevocation.value = status
+  } catch {
+    if (generation === revocationCheckGeneration) keyboxRevocation.value = 'unknown'
   }
 }
 

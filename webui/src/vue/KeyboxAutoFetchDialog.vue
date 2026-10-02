@@ -136,12 +136,15 @@ watch(() => props.modelValue, open => {
 })
 
 function requestClose(): boolean {
-  if (anyBusy.value) return false
+  // A save must not be abandoned half-applied, but the long-running fetch
+  // (revocation check plus download) keeps running in the background, so the
+  // dialog stays dismissible while only that is in flight.
+  if (busy.value) return false
   emit('update:modelValue', false)
   return true
 }
 
-defineExpose({ requestClose, busy: anyBusy })
+defineExpose({ requestClose, busy })
 
 async function save(): Promise<void> {
   await props.cli.setKeyboxRemoteSettings(
@@ -206,7 +209,7 @@ async function fetchNow(): Promise<void> {
   <MiuixDialog
     :model-value="modelValue"
     :title="tr('tools_keybox_auto_fetch', 'Auto fetch Keybox')"
-    :close-on-click-modal="!anyBusy"
+    :close-on-click-modal="!busy"
     @update:model-value="value => { if (!value) requestClose() }"
   >
     <div class="remote-dialog" :aria-busy="anyBusy || status === 'loading'">
@@ -306,7 +309,7 @@ async function fetchNow(): Promise<void> {
       </p>
 
       <div class="remote-dialog__actions">
-        <MiuixButton :disabled="anyBusy" @click="requestClose">
+        <MiuixButton :disabled="busy" @click="requestClose">
           {{ tr('functional_button_cancel', 'Cancel') }}
         </MiuixButton>
         <MiuixButton :disabled="!canFetch" @click="fetchNow">
