@@ -180,7 +180,7 @@
     <string name="keybox_auto_fetch_saved">Zapisano ustawienia automatycznego pobierania.</string>
     <string name="keybox_auto_fetch_installed">Zdalny Keybox pobrany i zainstalowany.</string>
     <string name="keybox_auto_fetch_unchanged">Zdalny Keybox jest już zgodny z zainstalowanym.</string>
-    <string name="keybox_auto_fetch_invalid_url">Adres URL Keybox i proxy muszą być puste lub zaczynać się od https://</string>
+    <string name="keybox_auto_fetch_invalid_url">Adres URL Keybox i proxy musza byc puste lub zaczynac sie od http:// lub https://</string>
     <string name="keybox_auto_fetch_preview">Tylko podgląd. Ustawień urządzenia nie można tu zapisać.</string>
     <string name="keybox_auto_fetch_interval">Interwał aktualizacji</string>
     <string name="keybox_auto_fetch_interval_hours">Godziny</string>

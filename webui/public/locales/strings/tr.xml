@@ -180,7 +180,7 @@
     <string name="keybox_auto_fetch_saved">Otomatik alım ayarları kaydedildi.</string>
     <string name="keybox_auto_fetch_installed">Uzak Keybox indirildi ve yüklendi.</string>
     <string name="keybox_auto_fetch_unchanged">Uzak Keybox zaten yüklü olanla eşleşiyor.</string>
-    <string name="keybox_auto_fetch_invalid_url">Keybox URL'si ve proxy boş veya https:// ile başlamalıdır</string>
+    <string name="keybox_auto_fetch_invalid_url">Keybox URL'si ve proxy bos olmali veya http:// ya da https:// ile baslamali</string>
     <string name="keybox_auto_fetch_preview">Yalnızca önizleme. Cihaz ayarları burada kaydedilemez.</string>
     <string name="keybox_auto_fetch_interval">Güncelleme aralığı</string>
     <string name="keybox_auto_fetch_interval_hours">Saat</string>

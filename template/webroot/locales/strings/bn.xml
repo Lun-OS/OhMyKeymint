@@ -180,7 +180,7 @@
     <string name="keybox_auto_fetch_saved">স্বয়ংক্রিয় আনয়নের সেটিংস সংরক্ষিত হয়েছে।</string>
     <string name="keybox_auto_fetch_installed">রিমোট Keybox ডাউনলোড ও ইনস্টল করা হয়েছে।</string>
     <string name="keybox_auto_fetch_unchanged">রিমোট Keybox ইনস্টল করাটির সাথে ইতিমধ্যেই মেলে।</string>
-    <string name="keybox_auto_fetch_invalid_url">Keybox URL এবং প্রক্সি খালি বা https:// দিয়ে শুরু হতে হবে</string>
+    <string name="keybox_auto_fetch_invalid_url">Keybox URL এবং প্রক্সি খালি থাকতে হবে বা http:// বা https:// দিয়ে শুরু হতে হবে</string>
     <string name="keybox_auto_fetch_preview">শুধুমাত্র প্রিভিউ। এখানে ডিভাইস সেটিংস সংরক্ষণ করা যাবে না।</string>
     <string name="keybox_auto_fetch_interval">আপডেট ব্যবধান</string>
     <string name="keybox_auto_fetch_interval_hours">ঘণ্টা</string>

@@ -1073,11 +1073,12 @@ fn fetch_google_attestation_status() -> Result<String> {
     let requested_uri: Uri = GOOGLE_ATTESTATION_STATUS_URL
         .parse()
         .context("Google attestation status URL is invalid")?;
-    webui_http::download_https_utf8(
+    webui_http::download_utf8(
         requested_uri,
         &DownloadPolicy {
             resource: "Google attestation status list",
             redirect_allowlist: "the fixed Google attestation status endpoint",
+            https_only: true,
             max_bytes: MAX_ATTESTATION_STATUS_BYTES,
             max_size_label: "512 KiB",
             max_redirects: 0,

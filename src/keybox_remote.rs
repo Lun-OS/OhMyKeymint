@@ -244,8 +244,10 @@ fn parse_remote_uri(value: &str) -> Result<Uri> {
     let uri: Uri = value
         .parse()
         .map_err(|error| anyhow::anyhow!("URL is invalid: {error}"))?;
-    if uri.scheme_str() != Some("https") {
-        bail!("URL must use https");
+    // Plain http stays allowed for user-configured sources; the download is
+    // the user's own choice and the payload is validated after transfer.
+    if !matches!(uri.scheme_str(), Some("https") | Some("http")) {
+        bail!("URL must use http or https");
     }
     let Some(authority) = uri.authority() else {
         bail!("URL has no host");
@@ -260,7 +262,7 @@ fn parse_remote_uri(value: &str) -> Result<Uri> {
 }
 
 fn is_allowed_remote_keybox_uri(uri: &Uri) -> bool {
-    uri.scheme_str() == Some("https")
+    matches!(uri.scheme_str(), Some("https") | Some("http"))
         && uri
             .authority()
             .is_some_and(|authority| !authority.as_str().contains('@'))
@@ -318,14 +320,15 @@ fn fetch_effective_url(url: &str) -> Result<String> {
     }
     let policy = webui_http::DownloadPolicy {
         resource: "remote Keybox",
-        redirect_allowlist: "https endpoints",
+        redirect_allowlist: "http(s) endpoints",
+        https_only: false,
         max_bytes: MAX_REMOTE_KEYBOX_PAYLOAD_BYTES,
         max_size_label: "256 KiB",
         max_redirects: MAX_REDIRECTS,
         timeout: REMOTE_KEYBOX_TIMEOUT,
         connect_timeout: REMOTE_KEYBOX_CONNECT_TIMEOUT,
     };
-    webui_http::download_https_utf8(uri, &policy, is_allowed_remote_keybox_uri)
+    webui_http::download_utf8(uri, &policy, is_allowed_remote_keybox_uri)
 }
 
 /// Reports whether Google's attestation status marks the installed Keybox as
@@ -520,8 +523,14 @@ mod tests {
                 .unwrap();
         assert_eq!(parsed, settings(true, "", "https://gh-proxy.org/$url"));
 
+        // Plain http is a valid user choice for both the source and proxy.
+        let plain_http =
+            Settings::from_json_payload(&payload_json(true, "http://example.com/key", "", 360))
+                .unwrap();
+        assert_eq!(plain_http.url, "http://example.com/key");
+
         for (url, proxy) in [
-            ("http://example.com/key", ""),
+            ("ftp://example.com/key", ""),
             ("https://u@example.com/key", ""),
             ("https://example.com/ k", ""),
             ("", "ftp://proxy"),
@@ -593,7 +602,7 @@ mod tests {
     }
 
     #[test]
-    fn composed_proxy_urls_remain_parseable_https_uris() {
+    fn composed_proxy_urls_remain_parseable_http_uris() {
         for url in [
             effective_url(&Settings::default()),
             "https://gh-proxy.org/https://raw.githubusercontent.com/Yurii0307/yurikey/main/key"
@@ -603,8 +612,14 @@ mod tests {
             let uri: Uri = url.parse().unwrap();
             assert!(is_allowed_remote_keybox_uri(&uri));
         }
+        // Both schemes pass the allow check; the download client restricts
+        // https-only policies per caller.
+        for url in ["https://example.com/key", "http://example.com/key"] {
+            let uri: Uri = url.parse().unwrap();
+            assert!(is_allowed_remote_keybox_uri(&uri), "{url}");
+        }
         assert!(!is_allowed_remote_keybox_uri(
-            &"http://example.com/key".parse().unwrap()
+            &"ftp://example.com/key".parse().unwrap()
         ));
         assert!(!is_allowed_remote_keybox_uri(
             &"https://user@example.com/key".parse().unwrap()

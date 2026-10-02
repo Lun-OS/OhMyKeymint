@@ -180,7 +180,7 @@
     <string name="keybox_auto_fetch_saved">自動取得の設定を保存しました。</string>
     <string name="keybox_auto_fetch_installed">リモートの Keybox をダウンロードしてインストールしました。</string>
     <string name="keybox_auto_fetch_unchanged">リモートの Keybox はインストール済みと一致しています。</string>
-    <string name="keybox_auto_fetch_invalid_url">Keybox URL とプロキシは空欄、または https:// で始まる必要があります</string>
+    <string name="keybox_auto_fetch_invalid_url">Keybox URL とプロキシは空にするか、http:// または https:// で始めてください。</string>
     <string name="keybox_auto_fetch_preview">プレビューのみ。ここではデバイスの設定を保存できません。</string>
     <string name="keybox_auto_fetch_interval">更新間隔</string>
     <string name="keybox_auto_fetch_interval_hours">時間</string>

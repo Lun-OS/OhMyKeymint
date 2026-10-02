@@ -6,6 +6,9 @@ use ureq::http::Uri;
 pub(crate) struct DownloadPolicy {
     pub resource: &'static str,
     pub redirect_allowlist: &'static str,
+    /// Reject plain `http` targets. Only disabled for downloads whose source
+    /// is explicitly user-configured, such as the remote Keybox URL.
+    pub https_only: bool,
     pub max_bytes: usize,
     pub max_size_label: &'static str,
     pub max_redirects: usize,
@@ -13,7 +16,7 @@ pub(crate) struct DownloadPolicy {
     pub connect_timeout: Duration,
 }
 
-pub(crate) fn download_https_utf8<F>(
+pub(crate) fn download_utf8<F>(
     requested_uri: Uri,
     policy: &DownloadPolicy,
     is_allowed: F,
@@ -26,7 +29,7 @@ where
     }
 
     let agent: ureq::Agent = ureq::Agent::config_builder()
-        .https_only(true)
+        .https_only(policy.https_only)
         .max_redirects(0)
         .timeout_connect(Some(policy.connect_timeout))
         .timeout_global(Some(policy.timeout))

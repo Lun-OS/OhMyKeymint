@@ -56,8 +56,8 @@ function tr(key: string, fallback: string, ...args: unknown[]): string {
   return fallback.replace(/%s/g, () => String(args[index++] ?? ''))
 }
 
-function isHttpsOrEmpty(value: string): boolean {
-  return value === '' || /^https:\/\/[^\s]+$/i.test(value)
+function isHttpUrlOrEmpty(value: string): boolean {
+  return value === '' || /^https?:\/\/[^\s]+$/i.test(value)
 }
 
 function parseIntervalPart(value: string | number): number | null {
@@ -88,8 +88,8 @@ const dirty = computed(() => enabled.value !== saved.value.enabled
   || intervalTotalMinutes.value !== saved.value.interval_minutes
   || revokedOnly.value !== saved.value.revoked_only)
 
-const valid = computed(() => isHttpsOrEmpty(url.value.trim())
-  && isHttpsOrEmpty(proxy.value.trim())
+const valid = computed(() => isHttpUrlOrEmpty(url.value.trim())
+  && isHttpUrlOrEmpty(proxy.value.trim())
   && intervalValid.value)
 
 const canApply = computed(() => !preview && !busy.value && status.value === 'ready'
@@ -117,7 +117,10 @@ async function load(): Promise<void> {
       : await props.cli.getKeyboxRemoteSettings()
     if (currentGeneration !== generation || !props.modelValue) return
     enabled.value = state.enabled
-    url.value = state.url
+    // An empty stored URL means the built-in default source; show the real
+    // URL so the field is never blank, and leaving it that way saves the
+    // explicit default back.
+    url.value = state.url === '' ? DEFAULT_KEYBOX_REMOTE_URL : state.url
     proxy.value = state.proxy
     splitInterval(state.interval_minutes)
     revokedOnly.value = state.revoked_only
@@ -297,8 +300,8 @@ async function fetchNow(): Promise<void> {
         </div>
       </template>
 
-      <p v-if="status === 'ready' && (!isHttpsOrEmpty(url.trim()) || !isHttpsOrEmpty(proxy.trim()))" class="remote-dialog__error" role="alert">
-        {{ tr('keybox_auto_fetch_invalid_url', 'The Keybox URL and proxy must be empty or start with https://') }}
+      <p v-if="status === 'ready' && (!isHttpUrlOrEmpty(url.trim()) || !isHttpUrlOrEmpty(proxy.trim()))" class="remote-dialog__error" role="alert">
+        {{ tr('keybox_auto_fetch_invalid_url', 'The Keybox URL and proxy must be empty or start with http:// or https://') }}
       </p>
       <p v-else-if="status === 'ready' && !intervalValid" class="remote-dialog__error" role="alert">
         {{ tr('keybox_auto_fetch_invalid_interval', 'The update interval must be between 15 minutes and 7 days.') }}

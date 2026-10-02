@@ -180,7 +180,7 @@
     <string name="keybox_auto_fetch_saved">Ajustes de obtención automática guardados.</string>
     <string name="keybox_auto_fetch_installed">Keybox remoto descargado e instalado.</string>
     <string name="keybox_auto_fetch_unchanged">El Keybox remoto ya coincide con el instalado.</string>
-    <string name="keybox_auto_fetch_invalid_url">La URL del Keybox y el proxy deben estar vacíos o empezar por https://</string>
+    <string name="keybox_auto_fetch_invalid_url">La URL de la Keybox y el proxy deben estar vacios o empezar por http:// o https://</string>
     <string name="keybox_auto_fetch_preview">Solo vista previa. Aquí no se pueden guardar los ajustes del dispositivo.</string>
     <string name="keybox_auto_fetch_interval">Intervalo de actualización</string>
     <string name="keybox_auto_fetch_interval_hours">Horas</string>

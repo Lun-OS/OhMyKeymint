@@ -180,7 +180,7 @@
     <string name="keybox_auto_fetch_saved">تم حفظ إعدادات الجلب التلقائي.</string>
     <string name="keybox_auto_fetch_installed">تم تنزيل Keybox البعيد وتثبيته.</string>
     <string name="keybox_auto_fetch_unchanged">Keybox البعيد يطابق المثبّت بالفعل.</string>
-    <string name="keybox_auto_fetch_invalid_url">يجب أن يكون عنوان URL الخاص بـ Keybox والوكيل فارغين أو يبدآن بـ https://</string>
+    <string name="keybox_auto_fetch_invalid_url">يجب أن يكون عنوان URL الخاص بـ Keybox والوكيل فارغين أو يبدأان بـ http:// أو https://</string>
     <string name="keybox_auto_fetch_preview">معاينة فقط. لا يمكن حفظ إعدادات الجهاز هنا.</string>
     <string name="keybox_auto_fetch_interval">فترة التحديث</string>
     <string name="keybox_auto_fetch_interval_hours">ساعات</string>

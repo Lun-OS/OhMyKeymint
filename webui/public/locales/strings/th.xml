@@ -180,7 +180,7 @@
     <string name="keybox_auto_fetch_saved">บันทึกการตั้งค่าการดึงอัตโนมัติแล้ว</string>
     <string name="keybox_auto_fetch_installed">ดาวน์โหลดและติดตั้ง Keybox จากระยะไกลแล้ว</string>
     <string name="keybox_auto_fetch_unchanged">Keybox จากระยะไกลตรงกับที่ติดตั้งไว้แล้ว</string>
-    <string name="keybox_auto_fetch_invalid_url">URL ของ Keybox และพร็อกซีต้องเว้นว่างหรือขึ้นต้นด้วย https://</string>
+    <string name="keybox_auto_fetch_invalid_url">URL ของ Keybox และพร็อกซีต้องเว้นว่างหรือขึ้นต้นด้วย http:// หรือ https://</string>
     <string name="keybox_auto_fetch_preview">แสดงตัวอย่างเท่านั้น ไม่สามารถบันทึกการตั้งค่าอุปกรณ์ที่นี่ได้</string>
     <string name="keybox_auto_fetch_interval">ช่วงเวลาอัปเดต</string>
     <string name="keybox_auto_fetch_interval_hours">ชั่วโมง</string>

@@ -180,7 +180,7 @@
     <string name="keybox_auto_fetch_saved">Setelan pengambilan otomatis disimpan.</string>
     <string name="keybox_auto_fetch_installed">Keybox jarak jauh berhasil diunduh dan dipasang.</string>
     <string name="keybox_auto_fetch_unchanged">Keybox jarak jauh sudah sama dengan yang terpasang.</string>
-    <string name="keybox_auto_fetch_invalid_url">URL Keybox dan proksi harus kosong atau diawali https://</string>
+    <string name="keybox_auto_fetch_invalid_url">URL Keybox dan proxy harus kosong atau diawali dengan http:// atau https://</string>
     <string name="keybox_auto_fetch_preview">Hanya pratinjau. Setelan perangkat tidak dapat disimpan di sini.</string>
     <string name="keybox_auto_fetch_interval">Interval pembaruan</string>
     <string name="keybox_auto_fetch_interval_hours">Jam</string>

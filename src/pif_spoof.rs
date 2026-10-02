@@ -131,6 +131,7 @@ fn download_feed(resource: &FeedResource) -> Result<String> {
     let policy = webui_http::DownloadPolicy {
         resource: resource.label(),
         redirect_allowlist: "the fixed PlayIntegrityFix feed paths",
+        https_only: true,
         max_bytes: resource.max_bytes(),
         max_size_label: resource.size_label(),
         max_redirects: MAX_REDIRECTS,
@@ -145,7 +146,7 @@ fn download_feed(resource: &FeedResource) -> Result<String> {
         if !is_allowed_feed_uri(&uri, resource) {
             bail!("{} URL is outside the fixed feed paths", resource.label());
         }
-        webui_http::download_https_utf8(uri, &policy, |uri| is_allowed_feed_uri(uri, resource))
+        webui_http::download_utf8(uri, &policy, |uri| is_allowed_feed_uri(uri, resource))
     };
 
     match fetch(&primary) {

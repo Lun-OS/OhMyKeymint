@@ -179,8 +179,8 @@ remain available; the WebUI still requires an `.xml` filename. If the system
 picker cannot be opened, the WebUI falls back to its shared-storage browser.
 
 The Tools page also provides **Auto fetch Keybox**. It is disabled by default.
-When enabled, the module downloads a base64-encoded `keybox.xml` over HTTPS
-from `https://raw.githubusercontent.com/Yurii0307/yurikey/main/key`, decodes
+When enabled, the module downloads a base64-encoded `keybox.xml` over HTTP or
+HTTPS from `https://raw.githubusercontent.com/Yurii0307/yurikey/main/key`, decodes
 it, and replaces `/data/misc/keystore/omk/keybox.xml` whenever the decoded
 content differs from the installed Keybox. A custom source URL can be
 configured, and a proxy template rewrites the request: `$url` inside the
@@ -204,9 +204,11 @@ from 15 minutes up to 7 days, with six hours as the default; a changed
 interval applies from the next refresh cycle. **Fetch now** performs the same
 revocation check and download on demand and reports when the fetch was
 skipped because the installed Keybox is not revoked.
-The source URL and proxy must be empty or use `https` and must not embed
-credentials. Downloads use the module's native HTTPS client with embedded
-WebPKI roots and are limited in size and time; the decoded payload is validated
+The source URL and proxy must be empty or use `http` or `https` and must not
+embed credentials; a plain `http` source is downloaded unencrypted by the
+user's own choice. Downloads use the module's native HTTP client with
+embedded WebPKI roots for `https` targets and are limited in size and time;
+the decoded payload is validated
 exactly like a local import before it replaces the file, so a failed or
 invalid fetch leaves the active keybox unchanged. The switch, URL, proxy,
 interval, and revocation switch persist in

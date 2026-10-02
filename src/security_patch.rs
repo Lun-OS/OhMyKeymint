@@ -170,11 +170,12 @@ pub fn download_android_security_bulletin(url: &str) -> Result<String> {
         bail!("Android Security Bulletin URL is not an allowed Google page");
     }
 
-    webui_http::download_https_utf8(
+    webui_http::download_utf8(
         requested_uri,
         &DownloadPolicy {
             resource: "Android Security Bulletin",
             redirect_allowlist: "the allowed Google page",
+            https_only: true,
             max_bytes: MAX_BULLETIN_BYTES,
             max_size_label: "2 MiB",
             max_redirects: MAX_BULLETIN_REDIRECTS,

@@ -185,7 +185,7 @@
     <string name="keybox_auto_fetch_saved">自动获取设置已保存。</string>
     <string name="keybox_auto_fetch_installed">已下载并安装远端 Keybox。</string>
     <string name="keybox_auto_fetch_unchanged">远端 Keybox 与当前安装的一致。</string>
-    <string name="keybox_auto_fetch_invalid_url">Keybox URL 与代理必须留空或以 https:// 开头</string>
+    <string name="keybox_auto_fetch_invalid_url">Keybox URL 与代理必须留空，或以 http:// 或 https:// 开头</string>
     <string name="keybox_auto_fetch_preview">仅为界面预览，此处无法保存设备设置。</string>
     <string name="keybox_auto_fetch_interval">更新间隔</string>
     <string name="keybox_auto_fetch_interval_hours">小时</string>

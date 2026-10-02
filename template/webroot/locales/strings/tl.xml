@@ -180,7 +180,7 @@
     <string name="keybox_auto_fetch_saved">Na-save ang mga setting ng awtomatikong pagkuha.</string>
     <string name="keybox_auto_fetch_installed">Na-download at naka-install ang remote na Keybox.</string>
     <string name="keybox_auto_fetch_unchanged">Ang remote na Keybox ay tugma na sa naka-install.</string>
-    <string name="keybox_auto_fetch_invalid_url">Dapat blangko o nagsisimula sa https:// ang URL ng Keybox at proxy</string>
+    <string name="keybox_auto_fetch_invalid_url">Dapat walang laman ang Keybox URL at proxy o magsisimula sa http:// o https://</string>
     <string name="keybox_auto_fetch_preview">Preview lang. Hindi mai-save dito ang mga setting ng device.</string>
     <string name="keybox_auto_fetch_interval">Agwat ng pag-update</string>
     <string name="keybox_auto_fetch_interval_hours">Oras</string>

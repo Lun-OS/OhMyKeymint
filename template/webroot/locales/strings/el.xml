@@ -180,7 +180,7 @@
     <string name="keybox_auto_fetch_saved">Οι ρυθμίσεις αυτόματης λήψης αποθηκεύτηκαν.</string>
     <string name="keybox_auto_fetch_installed">Το απομακρυσμένο Keybox λήφθηκε και εγκαταστάθηκε.</string>
     <string name="keybox_auto_fetch_unchanged">Το απομακρυσμένο Keybox ήδη ταιριάζει με το εγκατεστημένο.</string>
-    <string name="keybox_auto_fetch_invalid_url">Το URL του Keybox και το proxy πρέπει να είναι κενά ή να ξεκινούν από https://</string>
+    <string name="keybox_auto_fetch_invalid_url">Το URL της Keybox και ο μεσολαβητής πρέπει να είναι κενοί ή να ξεκινούν με http:// ή https://</string>
     <string name="keybox_auto_fetch_preview">Μόνο προεπισκόπηση. Οι ρυθμίσεις της συσκευής δεν μπορούν να αποθηκευτούν εδώ.</string>
     <string name="keybox_auto_fetch_interval">Διάστημα ενημέρωσης</string>
     <string name="keybox_auto_fetch_interval_hours">Ώρες</string>

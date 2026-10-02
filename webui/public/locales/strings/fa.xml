@@ -180,7 +180,7 @@
     <string name="keybox_auto_fetch_saved">تنظیمات دریافت خودکار ذخیره شد.</string>
     <string name="keybox_auto_fetch_installed">Keybox از راه دور دانلود و نصب شد.</string>
     <string name="keybox_auto_fetch_unchanged">Keybox از راه دور با نصب‌شده یکسان است.</string>
-    <string name="keybox_auto_fetch_invalid_url">نشانی Keybox و پروکسی باید خالی یا با https:// شروع شوند</string>
+    <string name="keybox_auto_fetch_invalid_url">آدرس Keybox و پروکسی باید خالی باشند یا با http:// یا https:// شروع شوند</string>
     <string name="keybox_auto_fetch_preview">فقط پیش‌نمایش. تنظیمات دستگاه اینجا ذخیره نمی‌شود.</string>
     <string name="keybox_auto_fetch_interval">فاصله به‌روزرسانی</string>
     <string name="keybox_auto_fetch_interval_hours">ساعت</string>

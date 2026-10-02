@@ -180,7 +180,7 @@
     <string name="keybox_auto_fetch_saved">Настройки автополучения сохранены.</string>
     <string name="keybox_auto_fetch_installed">Удалённый Keybox скачан и установлен.</string>
     <string name="keybox_auto_fetch_unchanged">Удалённый Keybox уже совпадает с установленным.</string>
-    <string name="keybox_auto_fetch_invalid_url">URL Keybox и прокси должны быть пустыми или начинаться с https://</string>
+    <string name="keybox_auto_fetch_invalid_url">URL Keybox и прокси должны быть пустыми или начинаться с http:// или https://</string>
     <string name="keybox_auto_fetch_preview">Только предпросмотр. Настройки устройства здесь сохранить нельзя.</string>
     <string name="keybox_auto_fetch_interval">Интервал обновления</string>
     <string name="keybox_auto_fetch_interval_hours">Часы</string>
